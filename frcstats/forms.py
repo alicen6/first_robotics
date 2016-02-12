@@ -1,4 +1,5 @@
 from django import forms
+# from need .db import
 
 
 class Team(forms.Form):
@@ -6,7 +7,9 @@ class Team(forms.Form):
     team_name = forms.CharField(label='Team Name ', max_length=30)
 
 
-# create class for which competition, if week = #, choose comp from list
+#class Event(forms.Form):
+#    event_week = forms.ChoiceField(choices = week_choices, label='What week is your event? ')
+
 
 
 class Match(forms.Form):

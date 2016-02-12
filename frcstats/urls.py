@@ -20,4 +20,5 @@ from .views import get_name
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^form/', get_name)
+    # url(r'^chaining/', include('smart_selects.urls'))
 ]

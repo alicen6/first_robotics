@@ -27,4 +27,5 @@ def get_name(request):
         match = Match()
         teleop = Teleoperated()
 
-    return render(request, 'name.html', {'form': form, 'auto': auto, 'match': match, 'teleop': teleop})
+    return render(request, 'name.html', {'form': form, 'auto': auto,
+    'match': match, 'teleop': teleop, })
