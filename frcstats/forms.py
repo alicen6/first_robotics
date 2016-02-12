@@ -6,6 +6,9 @@ class Team(forms.Form):
     team_name = forms.CharField(label='Team Name ', max_length=30)
 
 
+# create class for which competition, if week = #, choose comp from list
+
+
 class Match(forms.Form):
     match_playing = forms.IntegerField(label='Match Number ')
 
@@ -14,16 +17,16 @@ class Autonomous(forms.Form):
     auton_high_goals = forms.IntegerField(label='How many high goals were scored in autonomous? ')
     auton_low_goals = forms.IntegerField(label='How many low goals were scored in autonomous? ')
     def_choices = (
-    ('Portcullis', 'Portcullis'),
-    ('Cheval de Frise', 'Cheval de Frise'),
-    ('Moat', 'Moat'),
-    ('Ramparts', 'Ramparts'),
-    ('Drawbridge', 'Drawbridge'),
-    ('Sallyport', 'Sallyport'),
-    ('Rock Wall', 'Rock Wall'),
-    ('Rough Terrain', 'Rough Terrain'),
-    ('Low Bar', 'Low Bar'),
-    ('None', 'None'),
+    ('portc', 'Portcullis'),
+    ('cvf', 'Cheval de Frise'),
+    ('moat', 'Moat'),
+    ('ramparts', 'Ramparts'),
+    ('drawb', 'Drawbridge'),
+    ('sallyp', 'Sallyport'),
+    ('rockwall', 'Rock Wall'),
+    ('rought', 'Rough Terrain'),
+    ('lowbar', 'Low Bar'),
+    ('none', 'None'),
     )
     auton_def_reached = forms.ChoiceField(choices = def_choices, label = 'Which defense was reached in auto? ')
     auton_def_crossed = forms.ChoiceField(choices = def_choices, label = 'Which defense was crossed in auto? ')
@@ -33,16 +36,16 @@ class Teleoperated(forms.Form):
     teleop_high_goals = forms.IntegerField(label='How many high goals were scored in teleop? ')
     teleop_low_goals = forms.IntegerField(label='How many low goals were scored in teleop? ')
     def_choices = (
-    ('Portcullis', 'Portcullis'),
-    ('Cheval de Frise', 'Cheval de Frise'),
-    ('Moat', 'Moat'),
-    ('Ramparts', 'Ramparts'),
-    ('Drawbridge', 'Drawbridge'),
-    ('Sallyport', 'Sallyport'),
-    ('Rock Wall', 'Rock Wall'),
-    ('Rough Terrain', 'Rough Terrain'),
-    ('Low Bar', 'Low Bar'),
-    ('None', 'None'),
+    ('portc', 'Portcullis'),
+    ('cvf', 'Cheval de Frise'),
+    ('moat', 'Moat'),
+    ('ramparts', 'Ramparts'),
+    ('drawb', 'Drawbridge'),
+    ('sallyp', 'Sallyport'),
+    ('rockwall', 'Rock Wall'),
+    ('rought', 'Rough Terrain'),
+    ('lowbar', 'Low Bar'),
+    ('none', 'None'),
     )
     teleop_def_crossed = forms.MultipleChoiceField(choices = def_choices, label = "Which defenses were crossed? ")
     teleop_def_stuck = forms.MultipleChoiceField(choices = def_choices, label = "Did the robot get stuck? ")
