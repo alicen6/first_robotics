@@ -1,0 +1,11 @@
+<form action="/your-name/" method="post">
+    {% csrf_token %}
+    <h1>Match Scouting Form</h1>
+    {{ form.as_p }}
+    {{ match.as_p }}
+    <h3>Autonomous</h3>
+    {{ auto.as_p}}
+    <h3>Teleoperated</h3>
+    {{ teleop.as_p}}
+    <input type="submit" value="Submit" />
+</form>
