@@ -1,7 +1,8 @@
-<form action="/your-name/" method="post">
+<form action="/your-name/add/" method="post">
     {% csrf_token %}
     <h1>Match Scouting Form</h1>
-    {{ form.as_p }}
+
+    {{ team.as_p }}
     {{ match.as_p }}
     <h3>Autonomous</h3>
     {{ auto.as_p}}

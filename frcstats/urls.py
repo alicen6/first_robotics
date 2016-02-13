@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from .views import get_name
+from .views import get_name # , post_new
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^form/', get_name)
+    url(r'^form/', get_name),
+    # url(r'^post/new/$', post_new, name='post_new')
     # url(r'^chaining/', include('smart_selects.urls'))
 ]

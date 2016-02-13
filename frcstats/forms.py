@@ -1,4 +1,8 @@
 from django import forms
+from .models import Team
+from django.forms import ModelForm
+# from frcstats.models import Feedback
+
 # from need .db import
 
 
@@ -6,6 +10,11 @@ class Team(forms.Form):
     team_number = forms.IntegerField(label='Team Number ')
     team_name = forms.CharField(label='Team Name ', max_length=30)
 
+
+class TeamForm(ModelForm):
+    class Meta:
+        model = Team
+        fields = ['team_number', 'team_name']
 
 #class Event(forms.Form):
 #    event_week = forms.ChoiceField(choices = week_choices, label='What week is your event? ')

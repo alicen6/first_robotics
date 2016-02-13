@@ -10,6 +10,11 @@ class Team(models.Model):
     team_location = models.CharField(max_length=30)
     team_notes = models.CharField(max_length=150)
 
+    posted_on = models.DateTimeField('Posted On')
+
+    def __unicode__(self):
+            return self.team_number
+
     class Meta:
         db_table = 'teams'
         app_label = 'frcstats'
