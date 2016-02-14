@@ -1,12 +1,26 @@
-<form action="/admin/frcstats/" method="post">
+<form action="/form/team/" method="post">
     {% csrf_token %}
-    <h1>Match Scouting Form</h1>
-
-    {{ team.as_p }}
-    {{ match.as_p }}
-    <h3>Autonomous</h3>
-    {{ auto.as_p}}
-    <h3>Teleoperated</h3>
-    {{ teleop.as_p}}
+    {{ team }}
     <input type="submit" value="Submit" />
 </form>
+
+
+
+
+<!--
+<form action="/form/team/" method="post">
+  {% csrf_token %}
+  <h1>Match Scouting Form</h1>
+  <form action="/team/add/" method="post">
+    {{ team.as_p }}</form>
+  <form action="/match/add/" method="post">
+    {{ match.as_p }}</form>
+  <h3>Autonomous</h3>
+  <form action="/auto/add/" method="post">
+    {{ auto.as_p}}</form>
+  <h3>Teleoperated</h3>
+  <form action="/teleop/add/" method="post">
+    {{ teleop.as_p}}</form>
+  <input type="submit" value="Submit" />
+</form>
+-->

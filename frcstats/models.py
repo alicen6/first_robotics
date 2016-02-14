@@ -22,13 +22,25 @@ class Week(models.Model):
     week = models.IntegerField()
     date = models.CharField(max_length=50)
 
-class Event_Name(models.Model):
+    class Meta:
+        db_table = 'weeks'
+        app_label = 'frcstats'
+
+class EventName(models.Model):
     event_name = models.CharField(max_length=15)
     event_location = models.CharField(max_length=50)
     week_id = models.ForeignKey(Week)
 
+    class Meta:
+        db_table = 'event_name'
+        app_label = 'frcstats'
+
 class MatchNumber(models.Model):
     match_number = models.IntegerField()
+
+    class Meta:
+        db_table = 'match_number'
+        app_label = 'frcstats'
 
 class AutonModel(models.Model):
     auton_high_goals = models.IntegerField()
