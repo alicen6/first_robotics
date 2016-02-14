@@ -14,7 +14,8 @@ def get_name(request):
         auto = Autonomous(request.POST)
         teleop = Teleoperated(request.POST)
         # check whether it's valid:
-        if form.is_valid() and auto.is_valid() and match.is_valid() and teleop.is_valid():
+        if form.is_valid():
+        # and auto.is_valid() and match.is_valid() and teleop.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('frcstats:url'))
         else:
