@@ -10,8 +10,6 @@ class Team(models.Model):
     team_location = models.CharField(max_length=30)
     team_notes = models.CharField(max_length=150)
 
-    posted_on = models.DateTimeField('Posted On')
-
     def __unicode__(self):
             return self.team_number
 
@@ -25,10 +23,31 @@ class Week(models.Model):
     date = models.CharField(max_length=50)
 
 class Event_Name(models.Model):
-    event_name = models.IntegerField(max_length=50)
+    event_name = models.CharField(max_length=15)
     event_location = models.CharField(max_length=50)
     week_id = models.ForeignKey(Week)
 
-# class Event(models.Model):
-#    week_id = models.ForeignKey(Week)
-#    event_id = GroupedForeignKey(Event_Name, "week_id")
+class MatchNumber(models.Model):
+    match_number = models.IntegerField()
+
+class AutonModel(models.Model):
+    auton_high_goals = models.IntegerField()
+    auton_low_goals = models.IntegerField()
+    auton_def_crossed = models.CharField(max_length=15)
+    auton_def_reached = models.CharField(max_length=15)
+
+    class Meta:
+        db_table = 'matchstats_auto'
+        app_label = 'frcstats'
+
+class TeleopModel(models.Model):
+    teleop_high_goals = models.IntegerField()
+    teleop_low_goals = models.IntegerField()
+    teleop_def_crossed = models.CharField(max_length=15)
+    teleop_def_stuck = models.CharField(max_length=15)
+    hang_input = models.IntegerField()
+    def_played = models.IntegerField()
+
+    class Meta:
+        db_table = 'matchstats_teleop'
+        app_label = 'frcstats'

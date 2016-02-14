@@ -1,5 +1,8 @@
 from django import forms
 from .models import Team as TeamModel
+from .models import MatchNumber
+from .models import AutonModel
+from .models import TeleopModel
 from django.forms import ModelForm
 
 
@@ -16,6 +19,12 @@ class TeamForm(ModelForm):
 
 class Match(forms.Form):
     match_playing = forms.IntegerField(label='Match Number ')
+
+
+class MatchForm(ModelForm):
+    class Meta:
+        model = MatchNumber
+        fields = ['match_number']
 
 
 class Autonomous(forms.Form):
@@ -35,6 +44,12 @@ class Autonomous(forms.Form):
     )
     auton_def_reached = forms.ChoiceField(choices = def_choices, label = 'Which defense was reached in auto? ')
     auton_def_crossed = forms.ChoiceField(choices = def_choices, label = 'Which defense was crossed in auto? ')
+
+
+class AutonForm(ModelForm):
+    class Meta:
+        model = AutonModel
+        fields = ['auton_high_goals', 'auton_low_goals', 'auton_def_crossed', 'auton_def_reached']
 
 
 class Teleoperated(forms.Form):
@@ -65,3 +80,9 @@ class Teleoperated(forms.Form):
     ('1', 'yes'),
     )
     def_played = forms.ChoiceField(choices = yes_or_no, label = "Did the robot play defense? ")
+
+
+class TeleopForm(ModelForm):
+    class Meta:
+        model = TeleopModel
+        fields = ['teleop_high_goals', 'teleop_low_goals', 'teleop_def_crossed', 'teleop_def_stuck', 'hang_input', 'def_played']
