@@ -1,4 +1,5 @@
 <form method="post" action="">
-  {% csrf_token %} {{ team_formset }}
+  {% csrf_token %} {{ team_form }}
+  {{  match_form  }}
   <input type="submit" value="Submit" />
 </form>

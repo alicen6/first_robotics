@@ -1,21 +1,35 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from django.forms import ModelForm, modelformset_factory
-from .forms import TeamForm
-from .models import Team
+from django.forms import ModelForm, modelform_factory
+from .models import Team, Match
 
 
 def get_name(request):
-    TeamFormSet = modelformset_factory(Team, fields=(
-        'team_name', 'team_number', 'robot_weight',
-        'robot_height', 'team_location', 'team_notes'))
+    TeamForm = modelform_factory(Team, fields='__all__')
+    MatchForm = modelform_factory(Match, fields='__all__')
     if request.method == 'POST':
-        formset = TeamFormSet(request.POST, request.FILES)
-        if formset.is_valid():
-            formset.save()
-            return render(request, 'confirmation.html', {'team_formset': formset})
-            # do something.
+        team_form = TeamForm(request.POST, request.FILES)
+        match_form = MatchForm(request.POST, request.FILES)
+        if team_form.is_valid() and match_form.is_valid():
+            team_form.save()
+            match_form.save()
+            return render(
+                request,
+                'confirmation.html',
+                {
+                    'team_form': team_form,
+                    'match_form': match_form
+                }
+            )
     else:
-        formset = TeamFormSet()
-    return render(request, 'name.html', {'team_formset': formset})
+        team_form = TeamForm()
+        match_form = MatchForm()
+    return render(
+        request,
+        'form.html',
+        {
+            'team_form': team_form,
+            'match_form': match_form
+        }
+    )

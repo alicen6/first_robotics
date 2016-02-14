@@ -1,10 +1,13 @@
 from django import forms
-from .models import Team  # , OtherModelNameHere
+from .models import Team, Match # , OtherModelNameHere
 
 
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = (
-            'team_name', 'team_number', 'robot_weight',
-            'robot_height', 'team_location', 'team_notes')
+        fields = '__all__'
+
+class MatchForm(forms.ModelForm):
+    class Meta:
+        model = Match
+        fields = '__all__'
