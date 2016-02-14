@@ -1,4 +1,6 @@
 from django.db import models
+from django import forms
+from choices import auton_def_choices, teleop_def_choices, defense_options, hang_options
 # from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField, GroupedForeignKey
 
 
@@ -7,46 +9,33 @@ class Team(models.Model):
     team_notes = models.CharField(max_length=150)
 
     def __unicode__(self):
-            return self.team_number
+        return str(self.team_number)
 
     class Meta:
         db_table = 'teams'
         app_label = 'frcstats'
 
 
-class Week(models.Model):
-    week = models.IntegerField()
-    date = models.CharField(max_length=50)
-
-    class Meta:
-        db_table = 'weeks'
-        app_label = 'frcstats'
-
-
-class EventName(models.Model):
-    event_name = models.CharField(max_length=15)
-    event_location = models.CharField(max_length=50)
-    week_id = models.ForeignKey(Week)
-
-    class Meta:
-        db_table = 'event_name'
-        app_label = 'frcstats'
-
-
 class Match(models.Model):
+    team_number = models.ForeignKey('Team', on_delete=models.CASCADE, unique=False)
     match_number = models.IntegerField()
-    auton_high_goals = models.IntegerField()
     auton_low_goals = models.IntegerField()
-    auton_def_crossed = models.CharField(max_length=15)
-    auton_def_reached = models.CharField(max_length=15)
-
-    teleop_high_goals = models.IntegerField()
+    auton_high_goals = models.IntegerField()
+    auton_def_reached = models.CharField(max_length=8, choices=auton_def_choices, default=None)
+    auton_def_crossed = models.CharField(max_length=8, choices=auton_def_choices, default=None)
     teleop_low_goals = models.IntegerField()
-    teleop_def_crossed = models.CharField(max_length=15)
-    teleop_def_stuck = models.CharField(max_length=15)
-    hang_input = models.IntegerField()
-    def_played = models.IntegerField()
+    teleop_high_goals = models.IntegerField()
+    teleop_portc = models.IntegerField(choices=teleop_def_choices, default=None)
+    teleop_drawb = models.IntegerField(choices=teleop_def_choices, default=None)
+    teleop_cdf = models.IntegerField(choices=teleop_def_choices, default=None)
+    teleop_moat = models.IntegerField(choices=teleop_def_choices, default=None)
+    teleop_sallyp = models.IntegerField(choices=teleop_def_choices, default=None)
+    teleop_rought = models.IntegerField(choices=teleop_def_choices, default=None)
+    teleop_lowbar = models.IntegerField(choices=teleop_def_choices, default=None)
+    teleop_ramparts = models.IntegerField(choices=teleop_def_choices, default=None)
+    hang_input = models.IntegerField(choices=hang_options, default=None)
+    played_def = models.IntegerField(choices=defense_options, default=None)
 
     class Meta:
-        db_table = 'match_number'
+        db_table = 'match_info'
         app_label = 'frcstats'
