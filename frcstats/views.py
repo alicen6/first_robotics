@@ -1,43 +1,21 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
-from .forms import *
-# from .models import Team
+from django.core.urlresolvers import reverse
+from django.forms import ModelForm, modelformset_factory
+from .forms import TeamForm
+from .models import Team
 
 
 def get_name(request):
-    # if this is a POST request we need to process the form data
-    try:
-        if request.method == 'POST':
-            # create a form instance and populate it with data from the request:
-            team = TeamForm(request.POST)
-            match = MatchForm(request.POST)
-            auto = AutonForm(request.POST)
-            teleop = TeleopForm(request.POST)
-            # check whether it's valid:
-            if team.is_valid() and auto.is_valid() and match.is_valid() and teleop.is_valid():
-                team.save()
-                auto.save()
-                match.save()
-                teleop.save()
-                return HttpResponseRedirect(reverse('frcstats:url'))
-            else:
-                err_msg = 'Something went wrong.'
-                return render(request, 'fail')
-    except Exception as error:
-        return render(request, error)
-
-    # if a GET (or any other method) we'll create a blank form
+    TeamFormSet = modelformset_factory(Team, fields=(
+        'team_name', 'team_number', 'robot_weight',
+        'robot_height', 'team_location', 'team_notes'))
+    if request.method == 'POST':
+        formset = TeamFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+            return render(request, 'confirmation.html', {'team_formset': formset})
+            # do something.
     else:
-        team = Team()
-        auto = Autonomous()
-        match = Match()
-        teleop = Teleoperated()
-
-    return render(request, 'name.html', {'team': team, 'auto': auto,
-    'match': match, 'teleop': teleop, })
-
-
-# def post_new(request):
-#    form = TeamForm()
-#    return render(request, 'blog/post_edit.html', {'form': form})
+        formset = TeamFormSet()
+    return render(request, 'name.html', {'team_formset': formset})

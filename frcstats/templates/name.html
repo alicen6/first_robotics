@@ -1,26 +1,4 @@
-<form action="/form/team/" method="post">
-    {% csrf_token %}
-    {{ team }}
-    <input type="submit" value="Submit" />
-</form>
-
-
-
-
-<!--
-<form action="/form/team/" method="post">
-  {% csrf_token %}
-  <h1>Match Scouting Form</h1>
-  <form action="/team/add/" method="post">
-    {{ team.as_p }}</form>
-  <form action="/match/add/" method="post">
-    {{ match.as_p }}</form>
-  <h3>Autonomous</h3>
-  <form action="/auto/add/" method="post">
-    {{ auto.as_p}}</form>
-  <h3>Teleoperated</h3>
-  <form action="/teleop/add/" method="post">
-    {{ teleop.as_p}}</form>
+<form method="post" action="">
+  {% csrf_token %} {{ team_formset }}
   <input type="submit" value="Submit" />
 </form>
--->
