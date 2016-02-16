@@ -3,10 +3,22 @@ from django import forms
 from choices import auton_def_choices, teleop_def_choices, defense_options, hang_options
 # from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField, GroupedForeignKey
 
+class Event(models.Model):
+    event_id = models.IntegerField()
+    week_id = models.IntegerField()
+    event_name = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return str(self.event_name)
+
+    class Meta:
+        db_table = 'events'
+        app_label = 'frcstats'
 
 class Team(models.Model):
     team_number = models.IntegerField()
     team_notes = models.CharField(max_length=150)
+    event_id = models.ForeignKey('Event', on_delete=models.CASCADE, unique=False)
 
     def __unicode__(self):
         return str(self.team_number)

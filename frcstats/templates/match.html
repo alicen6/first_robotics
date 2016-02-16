@@ -1,5 +1,68 @@
 <form method="post" action="">
   {% csrf_token %}
-  {{  match_form  }}
+  <div class="teamInfo">
+    {{ match_form.team_number.errors }}
+    <label for="{{ match_form.team_number.id_for_label }}">Team Number:</label>
+    {{ match_form.team_number }}
+    {{ match_form.match_number.errors }}
+    <label for="{{ match_form.match_number.id_for_label }}">Match Number:</label>
+    {{ match_form.match_number }}
+  </div>
+  <div class="autonGoals">
+    {{ match_form.auton_low_goals.errors }}
+    <label for="{{ match_form.auton_low_goals.id_for_label }}">Autonomous Low Goals:</label>
+    {{ match_form.auton_low_goals }}
+    {{ match_form.auton_high_goals.errors }}
+    <label for="{{ match_form.auton_high_goals.id_for_label }}">Autonomous High Goals:</label>
+    {{ match_form.auton_high_goals }}
+  </div>
+  <span class="autonDefenses">
+    {{ match_form.auton_def_reached.errors }}
+    <label for="{{ match_form.auton_def_reached.id_for_label }}">Autonomous Defence Reached:</label>
+    {{ match_form.auton_def_reached }}
+    {{ match_form.auton_def_crossed.errors }}
+    <label for="{{ match_form.auton_def_crossed.id_for_label }}">Autonomous Defence Crossed:</label>
+    {{ match_form.auton_def_crossed }}
+  </span>
+  <div class="teleopGoals">
+    {{ match_form.teleop_low_goals.errors }}
+    <label for="{{ match_form.teleop_low_goals.id_for_label }}">Teleop Low Goals:</label>
+    {{ match_form.teleop_low_goals }} {{ match_form.teleop_high_goals.errors }}
+    <label for="{{ match_form.teleop_high_goals.id_for_label }}">Teleop High Goals:</label>
+    {{ match_form.teleop_high_goals }}
+  </div>
+  <span class="teleopDefenses">
+      {{ match_form.teleop_portc.errors }}
+      <label for="{{ match_form.teleop_portc.id_for_label }}">Portcullis:</label>
+      {{ match_form.teleop_drawb }}
+      {{ match_form.teleop_portc.errors }}
+      <label for="{{ match_form.teleop_drawb.id_for_label }}">Drawbridge:</label>
+      {{ match_form.teleop_drawb }}
+      {{ match_form.teleop_cdf.errors }}
+      <label for="{{ match_form.teleop_cdf.id_for_label }}">Cheval De Frise:</label>
+      {{ match_form.teleop_cdf }}
+      {{ match_form.teleop_moat.errors }}
+      <label for="{{ match_form.teleop_moat.id_for_label }}">Moat:</label>
+      {{ match_form.teleop_moat }}
+      {{ match_form.teleop_ramparts.errors }}
+      <label for="{{ match_form.teleop_ramparts.id_for_label }}">Ramparts:</label>
+      {{ match_form.teleop_ramparts }}
+      {{ match_form.teleop_rockwall.errors }}
+      <label for="{{ match_form.teleop_rockwall.id_for_label }}">Rock Wall:</label>
+      {{ match_form.teleop_rockwall }}
+      {{ match_form.teleop_rought.errors }}
+      <label for="{{ match_form.teleop_rought.id_for_label }}">Rough Terrain:</label>
+      {{ match_form.teleop_rought }}
+      {{ match_form.teleop_lowbar.errors }}
+      <label for="{{ match_form.teleop_lowbar.id_for_label }}">Low Bar:</label>
+      {{ match_form.teleop_lowbar }}
+    </span>
+  <div class="teleopEnd">
+    {{ match_form.hang_input.errors }}
+    <label for="{{ match_form.hang_input.id_for_label }}">Did they hang?:</label>
+    {{ match_form.hang_input }} {{ match_form.played_def.errors }}
+    <label for="{{ match_form.played_def.id_for_label }}">Did they play defense?:</label>
+    {{ match_form.played_def }}
+  </div>
   <input type="submit" value="Submit" />
 </form>
