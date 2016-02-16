@@ -12,8 +12,11 @@ class TeamForm(forms.ModelForm):
 class MatchForm(forms.ModelForm):
     auton_low_goals = forms.IntegerField(label="Autonomous Low Goals Scored")
     auton_high_goals = forms.IntegerField(label="Autonomous High Goals Scored")
-    teleop_low_goals = forms.IntegerField(label="Teleoperated Low Goals Scored")
-    teleop_high_goals = forms.IntegerField(label="Teleoperated High Goals Scored")
+    teleop_low_goals = forms.IntegerField(
+        label="Teleoperated Low Goals Scored")
+    teleop_high_goals = forms.IntegerField(
+        label="Teleoperated High Goals Scored")
+
     class Meta:
         model = Match
         fields = '__all__'

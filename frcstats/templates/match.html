@@ -3,16 +3,14 @@
   <div class="teamInfo">
     {{ match_form.team_number.errors }}
     <label for="{{ match_form.team_number.id_for_label }}">Team Number:</label>
-    {{ match_form.team_number }}
-    {{ match_form.match_number.errors }}
+    {{ match_form.team_number }} {{ match_form.match_number.errors }}
     <label for="{{ match_form.match_number.id_for_label }}">Match Number:</label>
     {{ match_form.match_number }}
   </div>
   <div class="autonGoals">
     {{ match_form.auton_low_goals.errors }}
     <label for="{{ match_form.auton_low_goals.id_for_label }}">Autonomous Low Goals:</label>
-    {{ match_form.auton_low_goals }}
-    {{ match_form.auton_high_goals.errors }}
+    {{ match_form.auton_low_goals }} {{ match_form.auton_high_goals.errors }}
     <label for="{{ match_form.auton_high_goals.id_for_label }}">Autonomous High Goals:</label>
     {{ match_form.auton_high_goals }}
   </div>
