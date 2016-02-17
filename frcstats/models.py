@@ -1,7 +1,6 @@
 from django.db import models
 from django import forms
 from choices import auton_def_choices, teleop_def_choices, defense_options, hang_options
-# from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField, GroupedForeignKey
 
 
 class Event(models.Model):

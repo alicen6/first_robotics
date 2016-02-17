@@ -1,2 +1,5 @@
 Django==1.9.2
+django-crispy-forms==1.6.0
+django-forms-bootstrap==3.0.1
+django-smart-selects==1.2.2
 wheel==0.26.0
