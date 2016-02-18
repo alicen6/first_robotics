@@ -35,3 +35,8 @@ class MatchForm(forms.ModelForm):
             'hang_input': forms.RadioSelect,
             'played_def': forms.RadioSelect
         }
+
+
+class TeamStats(forms.ModelForm):
+    model = Team
+    fields = 'team_number'

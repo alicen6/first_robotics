@@ -14,14 +14,14 @@
     <label for="{{ match_form.auton_high_goals.id_for_label }}">Autonomous High Goals:</label>
     {{ match_form.auton_high_goals }}
   </div>
-  <span class="autonDefenses">
+  <inline class="autonDefenses">
     {{ match_form.auton_def_reached.errors }}
     <label for="{{ match_form.auton_def_reached.id_for_label }}">Autonomous Defence Reached:</label>
     {{ match_form.auton_def_reached }}
     {{ match_form.auton_def_crossed.errors }}
     <label for="{{ match_form.auton_def_crossed.id_for_label }}">Autonomous Defence Crossed:</label>
     {{ match_form.auton_def_crossed }}
-  </span>
+  </inline>
   <div class="teleopGoals">
     {{ match_form.teleop_low_goals.errors }}
     <label for="{{ match_form.teleop_low_goals.id_for_label }}">Teleop Low Goals:</label>

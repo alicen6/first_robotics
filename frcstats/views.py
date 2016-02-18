@@ -1,5 +1,5 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, modelform_factory
 from .models import Team, Match
@@ -52,3 +52,35 @@ def get_match(request):
             'match_form': match_form
         }
     )
+
+
+# def team_stats(request):
+#    team_number = request.GET.get('team_number', '')
+#    team_number_stats = Team.objects.filter(team_number=team_number)
+#    print team_number
+#    return HttpResponse(str(team_number))
+
+
+# def team_stats(request):
+#    stats = TeamStats.objects.filter(team_number=team_number)
+#    args = {}
+#    args.update(csrf(request))
+#    args['team_number'] = team_number
+#    if request.method == 'POST':
+#        team_number_stats = request.POST.get('team_number_stats')
+#        return redirect(reverse('stats_view', args=(team_number_stats,)))
+#    else:
+#        args = {}
+#        args.update(csrf(request))
+#        args['team_number'] = team_number
+#        return render(request, 'team-stats.html', args)
+#
+#
+# def view_stats(request, team_number_stats):
+#    user = User.objects.get(view_stats__id=team_number_stats)
+#    site = ProjectSite.objects.get(id=team_number_stats)
+#    args = {}
+#    args.update(csrf(request))
+#    args['Users'] = user
+#    args['team_number'] = site
+#    return render(request, 'team-stats.html', args)
