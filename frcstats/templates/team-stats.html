@@ -1,5 +1,10 @@
 <!-- This document is where the team stats will be able to be called and selected -->
 <form method="post" action="">
-  {% csrf_token %} {{ xxx }}
+  {% csrf_token %}
+  <select name="teams">
+    {% for team_number in team_numbers %}
+    <option value="{{ team_number }}">{{teams.team_number}}</option>
+    {% endfor %}
+  </select>
   <input type="submit" value="Submit" />
 </form>

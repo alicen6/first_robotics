@@ -1,9 +1,10 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, modelform_factory
 from .models import Team, Match
-from forms import MatchForm
+from forms import MatchForm, TeamStats
+from django.views.generic import View
 
 
 def get_name(request):
@@ -54,33 +55,19 @@ def get_match(request):
     )
 
 
-# def team_stats(request):
-#    team_number = request.GET.get('team_number', '')
-#    team_number_stats = Team.objects.filter(team_number=team_number)
-#    print team_number
-#    return HttpResponse(str(team_number))
+class TeamStatsView(View):
 
+    def get(self, request, *args, **kwargs):
+        return render(request, 'team-stats.html',
+                      {'team_numbers': Team.objects.values('team_number')})
 
-# def team_stats(request):
-#    stats = TeamStats.objects.filter(team_number=team_number)
-#    args = {}
-#    args.update(csrf(request))
-#    args['team_number'] = team_number
-#    if request.method == 'POST':
-#        team_number_stats = request.POST.get('team_number_stats')
-#        return redirect(reverse('stats_view', args=(team_number_stats,)))
-#    else:
-#        args = {}
-#        args.update(csrf(request))
-#        args['team_number'] = team_number
-#        return render(request, 'team-stats.html', args)
-#
-#
-# def view_stats(request, team_number_stats):
-#    user = User.objects.get(view_stats__id=team_number_stats)
-#    site = ProjectSite.objects.get(id=team_number_stats)
-#    args = {}
-#    args.update(csrf(request))
-#    args['Users'] = user
-#    args['team_number'] = site
-#    return render(request, 'team-stats.html', args)
+    def post(self, request, *args, **kwargs):
+        team_number = TeamStats(request.POST, request.FILES)
+        if team_number.is_valid():
+            # do stuff & add to database
+            team_number.save()
+            team_number = TeamStats.objects.create()
+            # use my_file.pk or whatever attribute of FileField your id is
+            # based on
+            return HttpResponseRedirect('/team-stats/%i/' % team_number.pk)
+        return render(request, 'team-stats.html', {'team_number': team_number})

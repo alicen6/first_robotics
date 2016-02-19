@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import get_name, get_match  # team_stats  # , post_new
+from .views import get_name, get_match, TeamStatsView  # , post_new
 
 
 urlpatterns = [
@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^form/team_info', get_name),
     url(r'^form/match', get_match),
     url(r'^login/$', auth_views.login),
-    # url(r'^team-stats/', team_stats)
+    url(r'^team-stats', TeamStatsView.as_view()),
 ]

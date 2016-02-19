@@ -38,5 +38,6 @@ class MatchForm(forms.ModelForm):
 
 
 class TeamStats(forms.ModelForm):
-    model = Team
-    fields = 'team_number'
+    class Meta:
+        model = Team
+        fields = ['team_number']
