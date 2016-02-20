@@ -65,8 +65,8 @@ class TeamStatsView(View):
         team_number = TeamStats(request.POST, request.FILES)
         if team_number.is_valid():
             # do stuff & add to database
-            team_number.save()
-            team_number = TeamStats.objects.create()
+            # team_number.save()
+            team_number = TeamStats.objects.filter()
             # use my_file.pk or whatever attribute of FileField your id is
             # based on
             return HttpResponseRedirect('/team-stats/%i/' % team_number.pk)

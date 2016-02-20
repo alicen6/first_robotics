@@ -3,7 +3,7 @@
   {% csrf_token %}
   <select name="teams">
     {% for team_number in team_numbers %}
-    <option value="{{ team_number }}">{{teams.team_number}}</option>
+    <option value="{{ team_number }}">{{ team_number }}</option>
     {% endfor %}
   </select>
   <input type="submit" value="Submit" />
