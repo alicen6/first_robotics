@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, modelform_factory
 from .models import Team, Match
@@ -55,19 +55,24 @@ def get_match(request):
     )
 
 
-class TeamStatsView(View):
-
-    def get(self, request, *args, **kwargs):
-        return render(request, 'team-stats.html',
-                      {'team_numbers': Team.objects.values('team_number')})
-
-    def post(self, request, *args, **kwargs):
-        team_number = TeamStats(request.POST, request.FILES)
-        if team_number.is_valid():
-            # do stuff & add to database
-            # team_number.save()
-            team_number = TeamStats.objects.filter()
-            # use my_file.pk or whatever attribute of FileField your id is
-            # based on
-            return HttpResponseRedirect('/team-stats/%i/' % team_number.pk)
-        return render(request, 'team-stats.html', {'team_number': team_number})
+def team_stats(request, team_number):
+    TeamForm = modelform_factory(Team, fields='__all__')
+    if request.method == 'POST':
+        team_form = TeamForm(request.POST, request.FILES)
+        if team_form.is_valid():
+            choose_team = get_object_or_404(Team, pk=team_number)
+            try:
+                selected_team = choose_team.team_number.get(
+                    pk=request.POST['choice'])
+            except (KeyError, Team.DoesNotExist):
+                # Redisplay the question voting form.
+                return render(request, 'team-stats.html', {
+                    'choose_team': choose_team,
+                    'error_message': "You didn't select a choice.",
+                })
+            else:
+                selected_team.save()
+                # Always return an HttpResponseRedirect after successfully dealing
+                # with POST data. This prevents data from being posted twice if a
+                # user hits the Back button.
+                return HttpResponseRedirect(reverse('team_number:team-stats', args=(choose_team.id,)))

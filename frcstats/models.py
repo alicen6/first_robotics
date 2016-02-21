@@ -18,9 +18,6 @@ class Event(models.Model):
 
 class Team(models.Model):
     team_number = models.IntegerField()
-    team_notes = models.CharField(max_length=150)
-    event_id = models.ForeignKey(
-        'Event', on_delete=models.CASCADE, unique=False)
 
     def __unicode__(self):
         return str(self.team_number)

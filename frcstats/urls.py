@@ -1,8 +1,10 @@
 """frcstats URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.9/topics/http/urls/
+    https:
+        //docs.djangoproject.com / en / 1.9 / topics / http / urls/
 Examples:
+
 Function views
     1. Add an import:  from my_app import views
     2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
@@ -16,7 +18,8 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import get_name, get_match, TeamStatsView  # , post_new
+from . import views
+from .views import get_name, get_match, team_stats  # , post_new
 
 
 urlpatterns = [
@@ -24,5 +27,6 @@ urlpatterns = [
     url(r'^form/team_info', get_name),
     url(r'^form/match', get_match),
     url(r'^login/$', auth_views.login),
-    url(r'^team-stats', TeamStatsView.as_view()),
+    url(r'^team-stats/', team_stats),
+    url(r'^team-stats/(?P<team_number>)/$', views.team_stats, name='team_stats')
 ]
