@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
-from .views import get_name, get_match, team_stats  # , post_new
+from .views import get_name, get_match, team_stats_from_team_number  # , post_new
 
 
 urlpatterns = [
@@ -27,6 +27,5 @@ urlpatterns = [
     url(r'^form/team_info', get_name),
     url(r'^form/match', get_match),
     url(r'^login/$', auth_views.login),
-    url(r'^team-stats/', team_stats),
-    url(r'^team-stats/(?P<team_number>)/$', views.team_stats, name='team_stats')
+    url(r'^team-stats/(?P<team_number>[0-9]+)/$', views.team_stats_from_team_number, name='team-test')
 ]

@@ -2,13 +2,6 @@ from django import forms
 from .models import Team, Match  # , OtherModelNameHere
 
 
-class TeamForm(forms.ModelForm):
-
-    class Meta:
-        model = Team
-        fields = '__all__'
-
-
 class MatchForm(forms.ModelForm):
     auton_low_goals = forms.IntegerField(label="Autonomous Low Goals Scored")
     auton_high_goals = forms.IntegerField(label="Autonomous High Goals Scored")
@@ -35,9 +28,3 @@ class MatchForm(forms.ModelForm):
             'hang_input': forms.RadioSelect,
             'played_def': forms.RadioSelect
         }
-
-
-class TeamStats(forms.ModelForm):
-    class Meta:
-        model = Team
-        fields = ['team_number']
