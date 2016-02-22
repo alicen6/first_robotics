@@ -28,6 +28,8 @@ def get_match(request):
         if match_form.is_valid():
             match_form.save()
             return render(request, 'confirmation.html', {'match_form': match_form})
+        else:
+            print match_form.errors
     else:
         match_form = MatchForm()
     return render(request, 'match.html', {'match_form': match_form})
@@ -140,43 +142,44 @@ def team_stats_from_team_number(request, team_number):
         auton_def_reached_values.append(match.auton_def_reached)
         auton_def_crossed_values.append(match.auton_def_crossed)
         played_def_values.append(match.played_def)
-    auton_low_stats = sum(auton_low_values) / float(len(auton_low_values))
-    auton_high_stats = sum(auton_high_values) / float(len(auton_high_values))
+        auton_low_stats = sum(auton_low_values) / float(len(auton_low_values))
+        auton_high_stats = sum(auton_high_values) / \
+            float(len(auton_high_values))
     teleop_low_stats = sum(teleop_low_values) / float(len(teleop_low_values))
     teleop_high_stats = sum(teleop_high_values) / \
         float(len(teleop_high_values))
     portc_stats_value = (sum(portc_stats) -
-                         float(len(portc_stats))) / float(len(portc_stats))
-    portc_stuck_stats = str(int((float(len(portc_stuck_stats)) / (
-        float(len(portc_stats)) + float(len(portc_stuck_stats))) * 100))) + "%"
+                         float(len(portc_stats))) / float(len(portc_stats)) if len(portc_stats) != 0 else 0
+    portc_stuck_stats = str(int(((float(len(portc_stuck_stats)) /
+                                  (float(len(portc_stats))) if len(portc_stats) != 0 else 0) + float(len(portc_stuck_stats))) * 100)) + "%"
     drawb_stats_value = (sum(drawb_stats) -
-                         float(len(drawb_stats))) / float(len(drawb_stats))
-    drawb_stuck_stats = str(int((float(len(drawb_stuck_stats)) / (
-        float(len(drawb_stats)) + float(len(drawb_stuck_stats))) * 100))) + "%"
+                         float(len(drawb_stats))) / float(len(drawb_stats)) if len(drawb_stats) != 0 else 0
+    drawb_stuck_stats = str(int(((float(len(drawb_stuck_stats)) /
+                                  (float(len(drawb_stats))) if len(drawb_stats) != 0 else 0) + float(len(drawb_stuck_stats))) * 100)) + "%"
     cdf_stats_value = (sum(cdf_stats) - float(len(cdf_stats))
-                       ) / float(len(cdf_stats))
-    cdf_stuck_stats = str(int((float(len(cdf_stuck_stats)) /
-                               (float(len(cdf_stats)) + float(len(cdf_stuck_stats))) * 100))) + "%"
+                       ) / float(len(cdf_stats)) if len(cdf_stats) != 0 else 0
+    cdf_stuck_stats = str(int(((float(len(cdf_stuck_stats)) /
+                                     (float(len(cdf_stats))) if len(cdf_stats) != 0 else 0) + float(len(cdf_stuck_stats))) * 100)) + "%"
     moat_stats_value = (sum(moat_stats) - float(len(moat_stats))
-                        ) / float(len(moat_stats))
-    moat_stuck_stats = str(int((float(len(moat_stuck_stats)) /
-                                (float(len(moat_stats)) + float(len(moat_stuck_stats))) * 100))) + "%"
+                        ) / float(len(moat_stats)) if len(moat_stats) != 0 else 0
+    moat_stuck_stats = str(int(((float(len(moat_stuck_stats)) /
+                                 (float(len(moat_stats))) if len(moat_stats) != 0 else 0) + float(len(moat_stuck_stats))) * 100)) + "%"
     sallyp_stats_value = (sum(sallyp_stats) - float(len(sallyp_stats))
-                          ) / float(len(sallyp_stats))
-    sallyp_stuck_stats = str(int((float(len(sallyp_stuck_stats)) /
-                                  (float(len(sallyp_stats)) + float(len(sallyp_stuck_stats))) * 100))) + "%"
+                          ) / float(len(sallyp_stats)) if len(sallyp_stats) != 0 else 0
+    sallyp_stuck_stats = str(int(((float(len(sallyp_stuck_stats)) /
+                                   (float(len(sallyp_stats))) if len(sallyp_stats) != 0 else 0) + float(len(sallyp_stuck_stats))) * 100)) + "%"
     rought_stats_value = (sum(rought_stats) - float(len(rought_stats))
-                          ) / float(len(rought_stats))
-    rought_stuck_stats = str(int((float(len(rought_stuck_stats)) /
-                                  (float(len(rought_stats)) + float(len(rought_stuck_stats))) * 100))) + "%"
+                          ) / float(len(rought_stats)) if len(rought_stats) != 0 else 0
+    rought_stuck_stats = str(int(((float(len(rought_stuck_stats)) /
+                                   (float(len(rought_stats))) if len(rought_stats) != 0 else 0) + float(len(rought_stuck_stats))) * 100)) + "%"
     lowbar_stats_value = (sum(lowbar_stats) - float(len(lowbar_stats))
-                          ) / float(len(lowbar_stats))
-    lowbar_stuck_stats = str(int((float(len(lowbar_stuck_stats)) /
-                                  (float(len(lowbar_stats)) + float(len(lowbar_stuck_stats))) * 100))) + "%"
+                          ) / float(len(lowbar_stats)) if len(lowbar_stats) != 0 else 0
+    lowbar_stuck_stats = str(int(((float(len(lowbar_stuck_stats)) /
+                                   (float(len(lowbar_stats))) if len(lowbar_stats) != 0 else 0) + float(len(lowbar_stuck_stats))) * 100)) + "%"
     ramparts_stats_value = (sum(ramparts_stats) - float(len(ramparts_stats))
-                            ) / float(len(ramparts_stats))
-    ramparts_stuck_stats = str(int((float(len(ramparts_stuck_stats)) /
-                                    (float(len(ramparts_stats)) + float(len(ramparts_stuck_stats))) * 100))) + "%"
+                            ) / float(len(ramparts_stats)) if len(ramparts_stats) != 0 else 0
+    ramparts_stuck_stats = str(int(((float(len(ramparts_stuck_stats)) /
+                                     (float(len(ramparts_stats))) if len(ramparts_stats) != 0 else 0) + float(len(ramparts_stuck_stats))) * 100)) + "%"
     hang_value = str(
         int(((float(len(hang_input_values)) + float(len(hang_success_values))) /
              (float(len(hang_input_values)) + float(len(hang_success_values)) + float(len(hang_fail_values)))) * 100)) + "%"

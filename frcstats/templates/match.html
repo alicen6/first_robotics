@@ -32,8 +32,8 @@
   <span class="teleopDefenses">
       {{ match_form.teleop_portc.errors }}
       <label for="{{ match_form.teleop_portc.id_for_label }}">Portcullis:</label>
-      {{ match_form.teleop_drawb }}
-      {{ match_form.teleop_portc.errors }}
+      {{ match_form.teleop_portc }}
+      {{ match_form.teleop_drawb.errors }}
       <label for="{{ match_form.teleop_drawb.id_for_label }}">Drawbridge:</label>
       {{ match_form.teleop_drawb }}
       {{ match_form.teleop_cdf.errors }}
@@ -45,6 +45,9 @@
       {{ match_form.teleop_ramparts.errors }}
       <label for="{{ match_form.teleop_ramparts.id_for_label }}">Ramparts:</label>
       {{ match_form.teleop_ramparts }}
+      {{ match_form.teleop_sallyp.errors }}
+      <label for="{{ match_form.teleop_sallyp.id_for_label }}">Sallyport:</label>
+      {{ match_form.teleop_sallyp }}
       {{ match_form.teleop_rockwall.errors }}
       <label for="{{ match_form.teleop_rockwall.id_for_label }}">Rock Wall:</label>
       {{ match_form.teleop_rockwall }}

@@ -47,6 +47,8 @@ class Match(models.Model):
     teleop_moat = models.IntegerField(choices=teleop_def_choices, default=None)
     teleop_sallyp = models.IntegerField(
         choices=teleop_def_choices, default=None)
+    teleop_rockwall = models.IntegerField(
+        choices=teleop_def_choices, default=None)
     teleop_rought = models.IntegerField(
         choices=teleop_def_choices, default=None)
     teleop_lowbar = models.IntegerField(
