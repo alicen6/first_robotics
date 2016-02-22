@@ -1,14 +1,19 @@
-auton_def_choices = (
-    ('portc', 'portcullis'),
-    ('cdf', 'cheval de frise'),
-    ('moat', 'moat'),
-    ('ramparts', 'ramparts'),
-    ('drawb', 'drawbridge'),
-    ('sallyp', 'sallyport'),
-    ('rockwall', 'rock wall'),
-    ('rought', 'rough terrain'),
-    ('lowbar', 'low bar'),
-    ('none', 'none')
+from collections import OrderedDict
+
+
+auton_def_choices = OrderedDict(
+    [
+        ('portc', 'portcullis'),
+        ('cdf', 'cheval de frise'),
+        ('moat', 'moat'),
+        ('ramparts', 'ramparts'),
+        ('drawb', 'drawbridge'),
+        ('sallyp', 'sallyport'),
+        ('rockwall', 'rock wall'),
+        ('rought', 'rough terrain'),
+        ('lowbar', 'low bar'),
+        ('none', 'none')
+    ]
 )
 
 teleop_def_choices = (

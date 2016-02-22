@@ -6,6 +6,7 @@ from .models import Team, Match
 from forms import MatchForm
 from django.views.generic import View
 from django import forms
+from .choices import auton_def_choices
 
 
 def get_name(request):
@@ -57,6 +58,7 @@ def team_stats_from_team_number(request, team_number):
     teleop_low_values = []
     teleop_high_values = []
     hang_input_values = []
+    hang_success_values = []
     hang_fail_values = []
     played_def_values = []
     portc_stats = []
@@ -124,10 +126,13 @@ def team_stats_from_team_number(request, team_number):
             ramparts_stats.append(match.teleop_ramparts)
         else:
             pass
-        if match.hang_input != 0:
+        if match.hang_input == 1:
             hang_input_values.append(match.hang_input)
+        elif match.hang_input == 2:
+            hang_success_values.append(match.hang_input)
         else:
             hang_fail_values.append(match.hang_input)
+
         auton_low_values.append(match.auton_low_goals)
         auton_high_values.append(match.auton_high_goals)
         teleop_low_values.append(match.teleop_low_goals)
@@ -173,7 +178,10 @@ def team_stats_from_team_number(request, team_number):
     ramparts_stuck_stats = str(int((float(len(ramparts_stuck_stats)) /
                                     (float(len(ramparts_stats)) + float(len(ramparts_stuck_stats))) * 100))) + "%"
     hang_value = str(
-        int((sum(hang_input_values) / float(len(hang_input_values))) * 10)) + "%"
+        int(((float(len(hang_input_values)) + float(len(hang_success_values))) /
+             (float(len(hang_input_values)) + float(len(hang_success_values)) + float(len(hang_fail_values)))) * 100)) + "%"
+    hang_success_stats = str(int(float(len(hang_success_values)) / (
+        float(len(hang_input_values)) + float(len(hang_success_values))) * 100)) + "%"
     hang_fail = str(int((float(len(hang_fail_values)) /
                          float(len(hang_input_values) + len(hang_fail_values))) * 100)) + "%"
     played_def_stats = str(
@@ -181,14 +189,25 @@ def team_stats_from_team_number(request, team_number):
 
     # team = get_object_or_404(Team, team_number=team_number)
     # team_number is the variable that will now allow you to do all the things
+    """
+    l = [["hi", "there"], ["hello", "their"]]
+    [x[0] for x in l]
+    for x in l:
+        print x[0]
+
+    d = {"hi": "there", "hello": "their"}
+    {x for x in d}
+    for x, y in d.iteritems():
+        print x, y
+    """
     return render(request, 'team-stats.html', {'teams': team,
                                                'hang_value': hang_value, 'hang_fail': hang_fail,
                                                'auton_low_stats': auton_low_stats,
                                                'auton_high_stats': auton_high_stats,
                                                'teleop_low_stats': teleop_low_stats,
                                                'teleop_high_stats': teleop_high_stats,
-                                               'auton_def_reached_values': auton_def_reached_values,
-                                               'auton_def_crossed_values': auton_def_crossed_values,
+                                               'auton_def_reached_values': list({auton_def_choices[x] for x in auton_def_reached_values}),
+                                               'auton_def_crossed_values': list({auton_def_choices[x] for x in auton_def_crossed_values}),
                                                'played_def_stats': played_def_stats,
                                                'portc_stats_value': portc_stats_value,
                                                'portc_stuck_stats': portc_stuck_stats,
@@ -205,5 +224,6 @@ def team_stats_from_team_number(request, team_number):
                                                'lowbar_stats_value': lowbar_stats_value,
                                                'lowbar_stuck_stats': lowbar_stuck_stats,
                                                'ramparts_stats_value': ramparts_stats_value,
-                                               'ramparts_stuck_stats': ramparts_stuck_stats
+                                               'ramparts_stuck_stats': ramparts_stuck_stats,
+                                               'hang_success_stats': hang_success_stats
                                                })

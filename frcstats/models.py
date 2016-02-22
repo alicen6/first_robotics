@@ -34,9 +34,9 @@ class Match(models.Model):
     auton_low_goals = models.IntegerField()
     auton_high_goals = models.IntegerField()
     auton_def_reached = models.CharField(
-        max_length=8, choices=auton_def_choices, default=None)
+        max_length=8, choices=auton_def_choices.items(), default=None)
     auton_def_crossed = models.CharField(
-        max_length=8, choices=auton_def_choices, default=None)
+        max_length=8, choices=auton_def_choices.items(), default=None)
     teleop_low_goals = models.IntegerField()
     teleop_high_goals = models.IntegerField()
     teleop_portc = models.IntegerField(
