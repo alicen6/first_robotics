@@ -1,5 +1,8 @@
 <!-- This document is where the team stats will be able to be called and selected -->
-<form method="post" action="">
-  {% csrf_token %} {{ team }}
-  <input type="submit" value="Submit" />
-</form>
+{% csrf_token %}
+{% for team in teams %}
+  {{ team.team_number }}
+{% endfor %}
+{% for match in matches %}
+  {{ match.hang_input }}
+{% endfor %}
