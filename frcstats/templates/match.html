@@ -1,12 +1,44 @@
+<style>
+h3 {
+  font-family: Verdana;
+}
+label {
+  font-family: Verdana;
+  font-size: 12px;
+}
+table {
+    border-collapse: collapse;
+
+}
+table, th, td {
+    border: 1px solid black;
+    padding: 15px;
+}
+a:link, a:visited {
+    background-color: #2F2933;
+    color: white;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana;
+    font-size: 12px;
+}
+a:hover, a:active {
+    background-color: #01A2A6;
+}
+</style>
+<h3>Match Scouting Form</h3>
 <form method="post" action="">
   {% csrf_token %}
-  <div class="teamInfo">
+  <span>
     {{ match_form.team_number.errors }}
     <label for="{{ match_form.team_number.id_for_label }}">Team Number:</label>
     {{ match_form.team_number }} {{ match_form.match_number.errors }}
     <label for="{{ match_form.match_number.id_for_label }}">Match Number:</label>
     {{ match_form.match_number }}
-  </div>
+  </span>
+  <br></br>
   <div class="autonGoals">
     {{ match_form.auton_low_goals.errors }}
     <label for="{{ match_form.auton_low_goals.id_for_label }}">Autonomous Low Goals:</label>
@@ -14,14 +46,18 @@
     <label for="{{ match_form.auton_high_goals.id_for_label }}">Autonomous High Goals:</label>
     {{ match_form.auton_high_goals }}
   </div>
-  <inline class="autonDefenses">
+  <br></br>
+  <div class="autonDefenses">
+    <table>
     {{ match_form.auton_def_reached.errors }}
-    <label for="{{ match_form.auton_def_reached.id_for_label }}">Autonomous Defence Reached:</label>
-    {{ match_form.auton_def_reached }}
+    <tr><td><label for="{{ match_form.auton_def_reached.id_for_label }}">Autonomous Defence Reached:</label>
+    {{ match_form.auton_def_reached }}</td>
     {{ match_form.auton_def_crossed.errors }}
-    <label for="{{ match_form.auton_def_crossed.id_for_label }}">Autonomous Defence Crossed:</label>
-    {{ match_form.auton_def_crossed }}
-  </inline>
+    <td><label for="{{ match_form.auton_def_crossed.id_for_label }}">Autonomous Defence Crossed:</label>
+    {{ match_form.auton_def_crossed }}</td></tr>
+    </table>
+  </div>
+  <br></br>
   <div class="teleopGoals">
     {{ match_form.teleop_low_goals.errors }}
     <label for="{{ match_form.teleop_low_goals.id_for_label }}">Teleop Low Goals:</label>
@@ -29,35 +65,39 @@
     <label for="{{ match_form.teleop_high_goals.id_for_label }}">Teleop High Goals:</label>
     {{ match_form.teleop_high_goals }}
   </div>
-  <span class="teleopDefenses">
+  <br></br>
+  <div class="teleopDefenses">
+    <table>
       {{ match_form.teleop_portc.errors }}
-      <label for="{{ match_form.teleop_portc.id_for_label }}">Portcullis:</label>
-      {{ match_form.teleop_portc }}
+      <tr><td><label for="{{ match_form.teleop_portc.id_for_label }}">Portcullis:</label>
+      {{ match_form.teleop_portc }}</td>
       {{ match_form.teleop_drawb.errors }}
-      <label for="{{ match_form.teleop_drawb.id_for_label }}">Drawbridge:</label>
-      {{ match_form.teleop_drawb }}
+      <td><label for="{{ match_form.teleop_drawb.id_for_label }}">Drawbridge:</label>
+      {{ match_form.teleop_drawb }}</td>
       {{ match_form.teleop_cdf.errors }}
-      <label for="{{ match_form.teleop_cdf.id_for_label }}">Cheval De Frise:</label>
-      {{ match_form.teleop_cdf }}
+      <td><label for="{{ match_form.teleop_cdf.id_for_label }}">Cheval De Frise:</label>
+      {{ match_form.teleop_cdf }}</td></tr>
       {{ match_form.teleop_moat.errors }}
-      <label for="{{ match_form.teleop_moat.id_for_label }}">Moat:</label>
-      {{ match_form.teleop_moat }}
+      <tr><td><label for="{{ match_form.teleop_moat.id_for_label }}">Moat:</label>
+      {{ match_form.teleop_moat }}</td>
       {{ match_form.teleop_ramparts.errors }}
-      <label for="{{ match_form.teleop_ramparts.id_for_label }}">Ramparts:</label>
-      {{ match_form.teleop_ramparts }}
+      <td><label for="{{ match_form.teleop_ramparts.id_for_label }}">Ramparts:</label>
+      {{ match_form.teleop_ramparts }}</td>
       {{ match_form.teleop_sallyp.errors }}
-      <label for="{{ match_form.teleop_sallyp.id_for_label }}">Sallyport:</label>
-      {{ match_form.teleop_sallyp }}
+      <td><label for="{{ match_form.teleop_sallyp.id_for_label }}">Sallyport:</label>
+      {{ match_form.teleop_sallyp }}</td></tr>
       {{ match_form.teleop_rockwall.errors }}
-      <label for="{{ match_form.teleop_rockwall.id_for_label }}">Rock Wall:</label>
-      {{ match_form.teleop_rockwall }}
+      <tr><td><label for="{{ match_form.teleop_rockwall.id_for_label }}">Rock Wall:</label>
+      {{ match_form.teleop_rockwall }}</td>
       {{ match_form.teleop_rought.errors }}
-      <label for="{{ match_form.teleop_rought.id_for_label }}">Rough Terrain:</label>
-      {{ match_form.teleop_rought }}
+      <td><label for="{{ match_form.teleop_rought.id_for_label }}">Rough Terrain:</label>
+      {{ match_form.teleop_rought }}</td>
       {{ match_form.teleop_lowbar.errors }}
-      <label for="{{ match_form.teleop_lowbar.id_for_label }}">Low Bar:</label>
-      {{ match_form.teleop_lowbar }}
-    </span>
+      <td><label for="{{ match_form.teleop_lowbar.id_for_label }}">Low Bar:</label>
+      {{ match_form.teleop_lowbar }}</td></tr>
+    </table>
+  </div>
+  <br></br>
   <div class="teleopEnd">
     {{ match_form.hang_input.errors }}
     <label for="{{ match_form.hang_input.id_for_label }}">Did they hang?:</label>

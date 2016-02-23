@@ -1,4 +1,22 @@
 {% csrf_token %}
+<style>
+a:link, a:visited {
+    background-color: #2F2933;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana;
+}
+a:hover, a:active {
+    background-color: #01A2A6;
+}
+h3 {
+  font-family: Verdana;
+
+}
+</style>
+<h3>FRCStats Home Page</h2>
 <a href="{% url 'match' %}">Input Match Info</a>
-<br></br>
 <a href="{% url 'team-stats' %}">Look Up Team Stats</a>

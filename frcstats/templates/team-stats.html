@@ -1,12 +1,35 @@
 <!-- This document is where the team stats will be able to be called and selected -->
 {% csrf_token %}
 <style>
+h3 {
+  font-family: Verdana;
+}
+p {
+  font-family: Verdana;
+  font-size: 12px;
+}
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+    padding: 6px;
+    font-size: 12px;
+}
+a:link, a:visited {
+    background-color: #2F2933;
+    color: white;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana;
+    font-size: 12px;
+}
+a:hover, a:active {
+    background-color: #01A2A6;
 }
 </style>
-{% for team in teams %}
+<h3>Team Stats</h3>
+<p>{% for team in teams %}
 Team Number:  {{ team.team_number }}
 {% endfor %}
 <br></br>
@@ -71,5 +94,5 @@ Percent of Successful Hangs: {{ hang_success_stats }}
 Percent of Matches Robot Doesn't Try to Hang: {{ hang_fail }}
 <br></br>
 Percent of Matches Robot Plays Defense: {{ played_def_stats }}
-<br></br>
+<br></br></p>
 <a href="{% url 'home' %}">Back to Home</a>
