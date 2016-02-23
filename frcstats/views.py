@@ -221,3 +221,8 @@ def team_stats_from_team_number(request, team_number):
                                                'ramparts_stuck_stats': ramparts_stuck_stats,
                                                'hang_success_stats': hang_success_stats
                                                })
+
+
+def get_home(request):
+    context = {}
+    return render(request, 'home.html', context)
