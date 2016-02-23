@@ -51,6 +51,13 @@ def team_stats(request):
 
 
 def team_stats_from_team_number(request, team_number):
+    def divide(values):
+        return (sum(values) - float(len(values))) / float(len(values)) \
+            if len(values) != 0 else 0
+
+    def stuck_divide(values, stuck):
+        return str(int(((float(len(stuck)) /
+                                      (float(len(values))) if len(values) != 0 else 0) + float(len(stuck))) * 100)) + "%"
     team = Team.objects.filter(team_number=team_number)
     matches = Match.objects.filter(team_number=team[0].id)
     auton_low_values = []
@@ -148,38 +155,22 @@ def team_stats_from_team_number(request, team_number):
     teleop_low_stats = sum(teleop_low_values) / float(len(teleop_low_values))
     teleop_high_stats = sum(teleop_high_values) / \
         float(len(teleop_high_values))
-    portc_stats_value = (sum(portc_stats) -
-                         float(len(portc_stats))) / float(len(portc_stats)) if len(portc_stats) != 0 else 0
-    portc_stuck_stats = str(int(((float(len(portc_stuck_stats)) /
-                                  (float(len(portc_stats))) if len(portc_stats) != 0 else 0) + float(len(portc_stuck_stats))) * 100)) + "%"
-    drawb_stats_value = (sum(drawb_stats) -
-                         float(len(drawb_stats))) / float(len(drawb_stats)) if len(drawb_stats) != 0 else 0
-    drawb_stuck_stats = str(int(((float(len(drawb_stuck_stats)) /
-                                  (float(len(drawb_stats))) if len(drawb_stats) != 0 else 0) + float(len(drawb_stuck_stats))) * 100)) + "%"
-    cdf_stats_value = (sum(cdf_stats) - float(len(cdf_stats))
-                       ) / float(len(cdf_stats)) if len(cdf_stats) != 0 else 0
-    cdf_stuck_stats = str(int(((float(len(cdf_stuck_stats)) /
-                                     (float(len(cdf_stats))) if len(cdf_stats) != 0 else 0) + float(len(cdf_stuck_stats))) * 100)) + "%"
-    moat_stats_value = (sum(moat_stats) - float(len(moat_stats))
-                        ) / float(len(moat_stats)) if len(moat_stats) != 0 else 0
-    moat_stuck_stats = str(int(((float(len(moat_stuck_stats)) /
-                                 (float(len(moat_stats))) if len(moat_stats) != 0 else 0) + float(len(moat_stuck_stats))) * 100)) + "%"
-    sallyp_stats_value = (sum(sallyp_stats) - float(len(sallyp_stats))
-                          ) / float(len(sallyp_stats)) if len(sallyp_stats) != 0 else 0
-    sallyp_stuck_stats = str(int(((float(len(sallyp_stuck_stats)) /
-                                   (float(len(sallyp_stats))) if len(sallyp_stats) != 0 else 0) + float(len(sallyp_stuck_stats))) * 100)) + "%"
-    rought_stats_value = (sum(rought_stats) - float(len(rought_stats))
-                          ) / float(len(rought_stats)) if len(rought_stats) != 0 else 0
-    rought_stuck_stats = str(int(((float(len(rought_stuck_stats)) /
-                                   (float(len(rought_stats))) if len(rought_stats) != 0 else 0) + float(len(rought_stuck_stats))) * 100)) + "%"
-    lowbar_stats_value = (sum(lowbar_stats) - float(len(lowbar_stats))
-                          ) / float(len(lowbar_stats)) if len(lowbar_stats) != 0 else 0
-    lowbar_stuck_stats = str(int(((float(len(lowbar_stuck_stats)) /
-                                   (float(len(lowbar_stats))) if len(lowbar_stats) != 0 else 0) + float(len(lowbar_stuck_stats))) * 100)) + "%"
-    ramparts_stats_value = (sum(ramparts_stats) - float(len(ramparts_stats))
-                            ) / float(len(ramparts_stats)) if len(ramparts_stats) != 0 else 0
-    ramparts_stuck_stats = str(int(((float(len(ramparts_stuck_stats)) /
-                                     (float(len(ramparts_stats))) if len(ramparts_stats) != 0 else 0) + float(len(ramparts_stuck_stats))) * 100)) + "%"
+    portc_stats_value = divide(portc_stats)
+    portc_stuck_stats = stuck_divide(portc_stats, portc_stuck_stats)
+    drawb_stats_value = divide(drawb_stats)
+    drawb_stuck_stats = stuck_divide(drawb_stats, drawb_stuck_stats)
+    cdf_stats_value = divide(cdf_stats)
+    cdf_stuck_stats = stuck_divide(cdf_stats, cdf_stuck_stats)
+    moat_stats_value = divide(moat_stats)
+    moat_stuck_stats = stuck_divide(moat_stats, moat_stuck_stats)
+    sallyp_stats_value = divide(sallyp_stats)
+    sallyp_stuck_stats = stuck_divide(sallyp_stats, sallyp_stuck_stats)
+    rought_stats_value = divide(rought_stats)
+    rought_stuck_stats = stuck_divide(rought_stats, rought_stuck_stats)
+    lowbar_stats_value = divide(lowbar_stats)
+    lowbar_stuck_stats = stuck_divide(lowbar_stats, lowbar_stuck_stats)
+    ramparts_stats_value = divide(ramparts_stats)
+    ramparts_stuck_stats = stuck_divide(ramparts_stats, ramparts_stuck_stats)
     hang_value = str(
         int(((float(len(hang_input_values)) + float(len(hang_success_values))) /
              (float(len(hang_input_values)) + float(len(hang_success_values)) + float(len(hang_fail_values)))) * 100)) + "%"
