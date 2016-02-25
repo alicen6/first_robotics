@@ -227,3 +227,8 @@ def team_stats_from_team_number(request, team_number):
 def get_home(request):
     context = {}
     return render(request, 'home.html', context)
+
+
+def get_thanks(request):
+    context = {}
+    return render(request, 'thanks.html', context)
