@@ -127,3 +127,5 @@ STATIC_URL = '/static/'
 # Cripsy forms
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")

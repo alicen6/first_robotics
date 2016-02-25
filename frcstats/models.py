@@ -17,7 +17,7 @@ class Event(models.Model):
 
 
 class Team(models.Model):
-    team_number = models.IntegerField()
+    team_number = models.PositiveIntegerField()
 
     def __unicode__(self):
         return str(self.team_number)
@@ -60,4 +60,17 @@ class Match(models.Model):
 
     class Meta:
         db_table = 'match_info'
+        app_label = 'frcstats'
+
+
+class Drive(models.Model):
+    team_number = models.ForeignKey(
+        'Team', on_delete=models.CASCADE, unique=False)
+    drivetrain = models.CharField(max_length=20)
+    gear_reduc = models.CharField(max_length=20)
+    motors = models.CharField(max_length=20)
+    extra_notes = models.CharField(max_length=120)
+
+    class Meta:
+        db_table = 'robot_info'
         app_label = 'frcstats'

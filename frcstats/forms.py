@@ -1,5 +1,5 @@
 from django import forms
-from .models import Team, Match  # , OtherModelNameHere
+from .models import Team, Match, Drive  # , OtherModelNameHere
 
 
 class MatchForm(forms.ModelForm):
@@ -28,3 +28,10 @@ class MatchForm(forms.ModelForm):
             'hang_input': forms.RadioSelect,
             'played_def': forms.RadioSelect
         }
+
+
+class DriveForm(forms.ModelForm):
+
+    class Meta:
+        model = Drive
+        fields = '__all__'

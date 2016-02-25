@@ -1,0 +1,119 @@
+<!-- This document is where the team stats will be able to be called and selected -->
+{% csrf_token %}
+<style>
+h3 {
+  font-family: Verdana;
+}
+p {
+  font-family: Verdana;
+  font-size: 12px;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 6px;
+    font-size: 12px;
+}
+a:link, a:visited {
+    background-color: #2F2933;
+    color: white;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana;
+    font-size: 12px;
+}
+a:hover, a:active {
+    background-color: #01A2A6;
+}
+</style>
+<h3>Team Stats for Each Match</h3>
+<p>{% for team in teams %}
+Team Number:  {{ team.team_number }}
+{% endfor %}
+<br></br>
+<table>
+  <tr>
+  <td>Match Number</td>
+  {% for entry in match_number %}
+  <td> {{ entry }} </td>
+  {% endfor %}</tr>
+<tr>
+<td>Auto Low Goals</td>
+{% for entry in auton_low_values %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<tr>
+<td>Auto High Goals</td>
+{% for entry in auton_high_values %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<tr>
+<td>Auto Defense Reached</td>
+{% for entry in auton_def_reached_values %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<tr>
+<td>Auto Defense Crossed</td>
+{% for entry in auton_def_crossed_values %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<tr>
+<td>Teleop Low Goals</td>
+{% for entry in teleop_low_values %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<tr>
+<td>Teleop High Goals</td>
+{% for entry in teleop_high_values %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<tr>
+<td>Portcullis</td>
+{% for entry in portc_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Drawbridge</td>
+{% for entry in drawb_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Cheval de Frise</td>
+{% for entry in cdf_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Moat</td>
+{% for entry in moat_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Sallyport</td>
+{% for entry in sallyp_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Rough Terrain</td>
+{% for entry in rought_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Low Bar</td>
+{% for entry in lowbar_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Ramparts</td>
+{% for entry in ramparts_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Rockwall</td>
+{% for entry in rockwall_stats %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Hang</td>
+{% for entry in hang_input_values %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+<td>Played Defense</td>
+{% for entry in played_def_values %}
+<td> {{ entry }} </td>
+{% endfor %}</tr>
+</table>
+</p>
+<a href="{% url 'home' %}">Back to Home</a>

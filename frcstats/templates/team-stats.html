@@ -33,6 +33,26 @@ a:hover, a:active {
 Team Number:  {{ team.team_number }}
 {% endfor %}
 <br></br>
+Drivetrain:
+{% for drive in drivetrain %}
+{{ drive }}
+{% endfor %}
+<br></br>
+Number of Motors:
+{% for motor in motors %}
+{{ motor }}
+{% endfor %}
+<br></br>
+Gear Reduction:
+{% for gear in gear_reduc %}
+{{ gear }}
+{% endfor %}
+<br></br>
+Notes:
+{% for note in notes %}
+{{ note }}
+{% endfor %}
+<br></br>
 Average Low Goals Scored in Autonomous: {{ auton_low_stats }}
 <br></br>
 Average High Goals Scored in Autonomous: {{ auton_high_stats }}

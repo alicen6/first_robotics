@@ -1,0 +1,33 @@
+
+<style>
+  p {
+    font-family: Verdana;
+    font-size: 12px;
+  }
+</style>
+<form method="post" action="">
+  {% csrf_token %}
+  <p>
+    {{ drive_form.team_number.errors }}
+    <label for="{{ drive_form.team_number.id_for_label }}">Team Number:</label>
+    {{ drive_form.team_number }}
+    <br></br>
+    {{ drive_form.drivetrain.errors }}
+    <label for="{{ drive_form.drivetrain.id_for_label }}">Drivetrain:</label>
+    {{ drive_form.drivetrain }}
+    <br></br>
+    {{ drive_form.gear_reduc.errors }}
+    <label for="{{ drive_form.gear_reduc.id_for_label }}">Gear Reduction:</label>
+    {{ drive_form.gear_reduc }}
+    <br></br>
+    {{ drive_form.motors.errors }}
+    <label for="{{ drive_form.motors.id_for_label }}">Number of Motors:</label>
+    {{ drive_form.motors }}
+    <br></br>
+    {{ drive_form.extra_notes.errors }}
+    <label for="{{ drive_form.extra_notes.id_for_label }}">Notes:</label>
+    {{ drive_form.extra_notes }}
+  </p>
+  <input type="submit" value="Submit" />
+</form>
+<a href="{% url 'home' %}">Back to Home</a>
