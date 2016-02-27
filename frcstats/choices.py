@@ -19,6 +19,7 @@ auton_def_choices = OrderedDict(
 teleop_def_choices = (
     (3, 'crossed twice'),
     (2, 'crossed once'),
+    (4, 'did not cross'),
     (1, 'got stuck'),
     (0, 'not in play')
 )

@@ -51,13 +51,19 @@ def team_stats(request):
 
 
 def team_stats_from_team_number(request, team_number):
-    def divide(values):
-        return (sum(values) - float(len(values))) / float(len(values)) \
-            if len(values) != 0 else 0
+    def divide(values, nope):
+        if len(values) != 0 or len(nope) != 0:
+            return (sum(values) - float(len(values))) / (float(len(values)) + float(len(nope))) \
+                # if len(values) != 0 else 0
+        else:
+            return 0
 
-    def stuck_divide(values, stuck):
-        return str(int(((float(len(stuck)) /
-                         (float(len(values))) if len(values) != 0 else 0) + float(len(stuck))) * 100)) + "%"
+    def stuck_divide(values, stuck, nope):
+        if len(values) != 0 or len(nope) != 0:
+            return str(int(float(len(stuck)) /
+                           (float(len(values)) + float(len(nope)) + float(len(stuck)))) * 100) + "%"
+        else:
+            return 0
     team = Team.objects.filter(team_number=team_number)
     if len(team) > 0:
         matches = Match.objects.filter(team_number=team[0].id)
@@ -94,58 +100,85 @@ def team_stats_from_team_number(request, team_number):
         ramparts_stuck_stats = []
         rockwall_stats = []
         rockwall_stuck_stats = []
+        portc_miss_stats = []
+        drawb_miss_stats = []
+        cdf_miss_stats = []
+        moat_miss_stats = []
+        sallyp_miss_stats = []
+        rought_miss_stats = []
+        lowbar_miss_stats = []
+        ramparts_miss_stats = []
+        rockwall_miss_stats = []
         try:
             for match in matches:
                 if match.teleop_portc == 1:
                     portc_stuck_stats.append(match.teleop_portc)
+                elif match.teleop_portc == 4:
+                    portc_miss_stats.append(match.teleop_portc)
                 elif match.teleop_portc != 0:
                     portc_stats.append(match.teleop_portc)
                 else:
                     pass
                 if match.teleop_drawb == 1:
                     drawb_stuck_stats.append(match.teleop_drawb)
+                elif match.teleop_drawb == 4:
+                    drawb_miss_stats.append(match.teleop_drawb)
                 elif match.teleop_drawb != 0:
                     drawb_stats.append(match.teleop_drawb)
                 else:
                     pass
                 if match.teleop_cdf == 1:
                     cdf_stuck_stats.append(match.teleop_cdf)
+                elif match.teleop_cdf == 4:
+                    cdf_miss_stats.append(match.teleop_cdf)
                 elif match.teleop_cdf != 0:
                     cdf_stats.append(match.teleop_cdf)
                 else:
                     pass
                 if match.teleop_moat == 1:
                     moat_stuck_stats.append(match.teleop_moat)
+                elif match.teleop_moat == 4:
+                    moat_miss_stats.append(match.teleop_moat)
                 elif match.teleop_moat != 0:
                     moat_stats.append(match.teleop_moat)
                 else:
                     pass
                 if match.teleop_sallyp == 1:
                     sallyp_stuck_stats.append(match.teleop_sallyp)
+                elif match.teleop_sallyp == 4:
+                    sallyp_miss_stats.append(match.teleop_sallyp)
                 elif match.teleop_sallyp != 0:
                     sallyp_stats.append(match.teleop_sallyp)
                 else:
                     pass
                 if match.teleop_rought == 1:
                     rought_stuck_stats.append(match.teleop_rought)
+                elif match.teleop_rought == 4:
+                    rought_miss_stats.append(match.teleop_rought)
                 elif match.teleop_rought != 0:
                     rought_stats.append(match.teleop_rought)
                 else:
                     pass
                 if match.teleop_lowbar == 1:
                     lowbar_stuck_stats.append(match.teleop_lowbar)
+                elif match.teleop_lowbar == 4:
+                    lowbar_miss_stats.append(match.teleop_lowbar)
                 elif match.teleop_lowbar != 0:
                     lowbar_stats.append(match.teleop_lowbar)
                 else:
                     pass
                 if match.teleop_ramparts == 1:
                     ramparts_stuck_stats.append(match.teleop_ramparts)
+                elif match.teleop_ramparts == 4:
+                    ramparts_miss_stats.append(match.teleop_ramparts)
                 elif match.teleop_ramparts != 0:
                     ramparts_stats.append(match.teleop_ramparts)
                 else:
                     pass
                 if match.teleop_rockwall == 1:
                     rockwall_stuck_stats.append(match.teleop_rockwall)
+                elif match.teleop_rockwall == 4:
+                    rockwall_miss_stats.append(match.teleop_rockwall)
                 elif match.teleop_rockwall != 0:
                     rockwall_stats.append(match.teleop_rockwall)
                 else:
@@ -172,26 +205,33 @@ def team_stats_from_team_number(request, team_number):
                 float(len(teleop_low_values))
             teleop_high_stats = sum(teleop_high_values) / \
                 float(len(teleop_high_values))
-            portc_stats_value = divide(portc_stats)
-            portc_stuck_stats = stuck_divide(portc_stats, portc_stuck_stats)
-            drawb_stats_value = divide(drawb_stats)
-            drawb_stuck_stats = stuck_divide(drawb_stats, drawb_stuck_stats)
-            cdf_stats_value = divide(cdf_stats)
-            cdf_stuck_stats = stuck_divide(cdf_stats, cdf_stuck_stats)
-            moat_stats_value = divide(moat_stats)
-            moat_stuck_stats = stuck_divide(moat_stats, moat_stuck_stats)
-            sallyp_stats_value = divide(sallyp_stats)
-            sallyp_stuck_stats = stuck_divide(sallyp_stats, sallyp_stuck_stats)
-            rought_stats_value = divide(rought_stats)
-            rought_stuck_stats = stuck_divide(rought_stats, rought_stuck_stats)
-            lowbar_stats_value = divide(lowbar_stats)
-            lowbar_stuck_stats = stuck_divide(lowbar_stats, lowbar_stuck_stats)
-            ramparts_stats_value = divide(ramparts_stats)
+            portc_stats_value = divide(portc_stats, portc_miss_stats)
+            portc_stuck_stats = stuck_divide(
+                portc_stats, portc_stuck_stats, portc_miss_stats)
+            drawb_stats_value = divide(drawb_stats, drawb_miss_stats)
+            drawb_stuck_stats = stuck_divide(
+                drawb_stats, drawb_stuck_stats, drawb_miss_stats)
+            cdf_stats_value = divide(cdf_stats, cdf_miss_stats)
+            cdf_stuck_stats = stuck_divide(
+                cdf_stats, cdf_stuck_stats, cdf_miss_stats)
+            moat_stats_value = divide(moat_stats, moat_miss_stats)
+            moat_stuck_stats = stuck_divide(
+                moat_stats, moat_stuck_stats, moat_miss_stats)
+            sallyp_stats_value = divide(sallyp_stats, sallyp_miss_stats)
+            sallyp_stuck_stats = stuck_divide(
+                sallyp_stats, sallyp_stuck_stats, sallyp_miss_stats)
+            rought_stats_value = divide(rought_stats, rought_miss_stats)
+            rought_stuck_stats = stuck_divide(
+                rought_stats, rought_stuck_stats, rought_miss_stats)
+            lowbar_stats_value = divide(lowbar_stats, lowbar_miss_stats)
+            lowbar_stuck_stats = stuck_divide(
+                lowbar_stats, lowbar_stuck_stats, lowbar_miss_stats)
+            ramparts_stats_value = divide(ramparts_stats, ramparts_miss_stats)
             ramparts_stuck_stats = stuck_divide(
-                ramparts_stats, ramparts_stuck_stats)
-            rockwall_stats_value = divide(rockwall_stats)
+                ramparts_stats, ramparts_stuck_stats, ramparts_miss_stats)
+            rockwall_stats_value = divide(rockwall_stats, rockwall_miss_stats)
             rockwall_stuck_stats = stuck_divide(
-                rockwall_stats, rockwall_stuck_stats)
+                rockwall_stats, rockwall_stuck_stats, rockwall_miss_stats)
             hang_value = str(
                 int(((float(len(hang_input_values)) + float(len(hang_success_values))) /
                      (float(len(hang_input_values)) + float(len(hang_success_values)) + float(len(hang_fail_values)))) * 100)) + "%"
@@ -308,6 +348,8 @@ def team_raw_from_team_number(request, team_number):
                     portc_stats.append('crossed once')
                 elif match.teleop_portc == 3:
                     portc_stats.append('crossed twice')
+                elif match.teleop_portc == 4:
+                    portc_stats.append('did not cross')
                 else:
                     portc_stats.append('not in play')
                 if match.teleop_drawb == 1:
@@ -316,6 +358,8 @@ def team_raw_from_team_number(request, team_number):
                     drawb_stats.append('crossed once')
                 elif match.teleop_drawb == 3:
                     drawb_stats.append('crossed twice')
+                elif match.teleop_drawb == 4:
+                    drawb_stats.append('did not cross')
                 else:
                     drawb_stats.append('not in play')
                 if match.teleop_cdf == 1:
@@ -324,6 +368,8 @@ def team_raw_from_team_number(request, team_number):
                     cdf_stats.append('crossed once')
                 elif match.teleop_cdf == 3:
                     cdf_stats.append('crossed twice')
+                elif match.teleop_cdf == 4:
+                    cdf_stats.append('did not cross')
                 else:
                     cdf_stats.append('not in play')
                 if match.teleop_moat == 1:
@@ -332,6 +378,8 @@ def team_raw_from_team_number(request, team_number):
                     moat_stats.append('crossed once')
                 elif match.teleop_moat == 3:
                     moat_stats.append('crossed twice')
+                elif match.teleop_moat == 4:
+                    moat_stats.append('did not cross')
                 else:
                     moat_stats.append('not in play')
                 if match.teleop_sallyp == 1:
@@ -340,6 +388,8 @@ def team_raw_from_team_number(request, team_number):
                     sallyp_stats.append('crossed once')
                 elif match.teleop_sallyp == 3:
                     sallyp_stats.append('crossed twice')
+                elif match.teleop_sallyp == 4:
+                    sallyp_stats.append('did not cross')
                 else:
                     sallyp_stats.append('not in play')
                 if match.teleop_rought == 1:
@@ -348,6 +398,8 @@ def team_raw_from_team_number(request, team_number):
                     rought_stats.append('crossed once')
                 elif match.teleop_rought == 3:
                     rought_stats.append('crossed twice')
+                elif match.teleop_rought == 4:
+                    rought_stats.append('did not cross')
                 else:
                     rought_stats.append('not in play')
                 if match.teleop_lowbar == 1:
@@ -356,6 +408,8 @@ def team_raw_from_team_number(request, team_number):
                     lowbar_stats.append('crossed once')
                 elif match.teleop_lowbar == 3:
                     lowbar_stats.append('crossed twice')
+                elif match.teleop_lowbar == 4:
+                    lowbar_stats.append('did not cross')
                 else:
                     lowbar_stats.append('not in play')
                 if match.teleop_ramparts == 1:
@@ -364,6 +418,8 @@ def team_raw_from_team_number(request, team_number):
                     ramparts_stats.append('crossed once')
                 elif match.teleop_ramparts == 3:
                     ramparts_stats.append('crossed twice')
+                elif match.teleop_ramparts == 4:
+                    ramparts_stats.append('did not cross')
                 else:
                     ramparts_stats.append('not in play')
                 if match.teleop_rockwall == 1:
@@ -372,6 +428,8 @@ def team_raw_from_team_number(request, team_number):
                     rockwall_stats.append('crossed once')
                 elif match.teleop_rockwall == 3:
                     rockwall_stats.append('crossed twice')
+                elif match.teleop_rockwall == 4:
+                    rockwall_stats.append('did not cross')
                 else:
                     rockwall_stats.append('not in play')
 
