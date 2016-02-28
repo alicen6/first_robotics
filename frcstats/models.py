@@ -74,3 +74,13 @@ class Drive(models.Model):
     class Meta:
         db_table = 'robot_info'
         app_label = 'frcstats'
+
+
+class TeamsByEvent(models.Model):
+    team_number = models.IntegerField()
+    event_name = models.CharField(max_length=50)
+    shorthand = models.CharField(max_length=12)
+
+    class Meta:
+        db_table = 'teams_by_event'
+        app_label = 'frcstats'
