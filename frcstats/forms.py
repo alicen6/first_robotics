@@ -1,5 +1,5 @@
 from django import forms
-from .models import Team, Match, Drive  # , OtherModelNameHere
+from .models import Team, Match, Drive, Event  # , OtherModelNameHere
 
 
 class MatchForm(forms.ModelForm):
@@ -35,3 +35,10 @@ class DriveForm(forms.ModelForm):
     class Meta:
         model = Drive
         fields = '__all__'
+
+
+class EventForm(forms.ModelForm):
+
+    class Meta:
+        model = Event
+        fields = ('event_name',)

@@ -3,8 +3,19 @@ from django import forms
 from choices import auton_def_choices, teleop_def_choices, defense_options, hang_options
 
 
+class TeamsByEvent(models.Model):
+    team_number = models.IntegerField()
+    event_name = models.CharField(max_length=50)
+    shorthand = models.CharField(max_length=12)
+
+    class Meta:
+        db_table = 'teams_by_event'
+        app_label = 'frcstats'
+
+
 class Event(models.Model):
-    event_id = models.IntegerField()
+    shorthand = models.ForeignKey(
+        'TeamsByEvent', on_delete=models.CASCADE, unique=False)
     week_id = models.IntegerField()
     event_name = models.CharField(max_length=50)
 
@@ -73,14 +84,4 @@ class Drive(models.Model):
 
     class Meta:
         db_table = 'robot_info'
-        app_label = 'frcstats'
-
-
-class TeamsByEvent(models.Model):
-    team_number = models.IntegerField()
-    event_name = models.CharField(max_length=50)
-    shorthand = models.CharField(max_length=12)
-
-    class Meta:
-        db_table = 'teams_by_event'
         app_label = 'frcstats'

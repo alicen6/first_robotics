@@ -2,8 +2,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, modelform_factory
-from .models import Team, Match, Drive, TeamsByEvent
-from forms import MatchForm, DriveForm
+from .models import Team, Match, Drive, TeamsByEvent, Event
+from forms import MatchForm, DriveForm, EventForm
 from django.views.generic import View
 from django import forms
 from .choices import auton_def_choices
@@ -506,31 +506,38 @@ def get_extra(request):
     return render(request, 'drive.html', {'drive_form': drive_form})
 
 
-def event_select(request):
-    class EventSelectForm(forms.Form):
-        event_select = forms.CharField()
+def team_compare(request):
+    class TeamNumberForm(forms.Form):
+        team_number_one = forms.IntegerField()
+        team_number_two = forms.IntegerField()
     if request.method == 'GET':
-        event_form = EventSelectForm()
+        form = TeamNumberForm()
     else:
         # A POST request: Handle Form Upload
-        event_form = EventSelectForm(request.POST)
+        form = TeamNumberForm(request.POST)
         # If data is valid, proceeds to create a new post and redirect the user
-        if event_form.is_valid():
-            event_name = event_form.cleaned_data['event_name']
-            return HttpResponseRedirect('/event-select/' + str(event_name))
-    return render(request, 'event-select.html', {'event_form': event_form})
+        if form.is_valid():
+            team_number_one = abs(form.cleaned_data['team_number_one'])
+            team_number_two = abs(form.cleaned_data['team_number_two'])
+            return HttpResponseRedirect('/team-compare/' + str(team_number_one) + str("-") + str(team_number_two))
+    return render(request, 'team-compare.html', {'team_number_form': form})
 
 
-def event_with_teams(request, event_name):
-    if len() > 0:
-        event = TeamsByEvent.objects.filter(event_name=event_name)
-        teams_in_event = []
-        for team in event:
-            teams_in_event.append(event.team_number)
-        for team in teams_in_event:
-            other_event = TeamsByEvent.objects.filter(team=team_number[0].id)
-            print other_event
+def team_compare_info(request, team_number_one, team_number_two):
+    # something goes here
+    # else:
+        # context = {}
+        # return render(request, 'non-team.html', context)
+    pass
 
-    else:
-        context = {}
-        return render(request, 'non-event.html', context)
+
+def event_info(request, shorthand):
+    shorthand = TeamsByEvent.objects.filter(shorthand=shorthand)
+    info = TeamsByEvent.objects.raw('SELECT event_name, team_number \
+                               FROM teams_by_event \
+                               WHERE team_number IN(SELECT team_number \
+                                                    FROM teams_by_event \
+                                                    WHERE shorthand= % s', [shorthand])
+    return render(request, 'event-info.html', {
+        'info': info,
+    })
