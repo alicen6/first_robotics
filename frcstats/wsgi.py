@@ -12,7 +12,7 @@ import sys
 
 
 # Activate your virtual env
-activate_env=os.path.expanduser("/home/ec2-user/git/first_robotics/venv/bin/activate_this.py")
+activate_env=os.path.expanduser("venv/bin/activate_this.py")
 execfile(activate_env, dict(__file__=activate_env))
 
 from django.core.wsgi import get_wsgi_application

@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, modelform_factory
-from .models import Team, Match, Drive
+from .models import Team, Match, Drive, TeamsByEvent
 from forms import MatchForm, DriveForm
 from django.views.generic import View
 from django import forms
@@ -504,3 +504,33 @@ def get_extra(request):
     else:
         drive_form = DriveForm()
     return render(request, 'drive.html', {'drive_form': drive_form})
+
+
+def event_select(request):
+    class EventSelectForm(forms.Form):
+        event_select = forms.CharField()
+    if request.method == 'GET':
+        event_form = EventSelectForm()
+    else:
+        # A POST request: Handle Form Upload
+        event_form = EventSelectForm(request.POST)
+        # If data is valid, proceeds to create a new post and redirect the user
+        if event_form.is_valid():
+            event_name = event_form.cleaned_data['event_name']
+            return HttpResponseRedirect('/event-select/' + str(event_name))
+    return render(request, 'event-select.html', {'event_form': event_form})
+
+
+def event_with_teams(request, event_name):
+    if len() > 0:
+        event = TeamsByEvent.objects.filter(event_name=event_name)
+        teams_in_event = []
+        for team in event:
+            teams_in_event.append(event.team_number)
+        for team in teams_in_event:
+            other_event = TeamsByEvent.objects.filter(team=team_number[0].id)
+            print other_event
+
+    else:
+        context = {}
+        return render(request, 'non-event.html', context)
