@@ -1,5 +1,204 @@
 <!-- Where you can compare stats on two teams -->
-<form method="post" action="">
-  {% csrf_token %} {{ team_number_form }}
-  <input type="submit" value="Submit" />
-</form>
+{% csrf_token %}
+<style>
+h3 {
+  font-family: Verdana;
+}
+p {
+  font-family: Verdana;
+  font-size: 12px;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 6px;
+    font-size: 12px;
+}
+a:link, a:visited {
+    background-color: #2F2933;
+    color: white;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana;
+    font-size: 12px;
+}
+a:hover, a:active {
+    background-color: #01A2A6;
+}
+</style>
+<h3>Team Stats</h3>
+<p>{% for team in team_one %}
+Team Number:  {{ team }}
+{% endfor %}
+<br></br>
+Drivetrain:
+{% for drive in drivetrain_one %}
+{{ drive }}
+{% endfor %}
+<br></br>
+Number of Motors:
+{% for motor in motors_one %}
+{{ motor }}
+{% endfor %}
+<br></br>
+Gear Reduction:
+{% for gear in gear_reduc_one %}
+{{ gear }}
+{% endfor %}
+<br></br>
+Notes:
+{% for note in notes_one %}
+{{ note }}
+{% endfor %}
+<br></br>
+Average Low Goals Scored in Autonomous: {{ auton_low_stats_one }}
+<br></br>
+Average High Goals Scored in Autonomous: {{ auton_high_stats_one }}
+<br></br>
+Defenses Reached in Autonomous:
+{% for defense in auton_def_reached_values_one %}
+{{ defense }},
+{% endfor %}
+ <br></br>
+Defenses Crossed in Autonomous:
+{% for crossed in auton_def_crossed_values_one %}
+{{ crossed }},
+{% endfor %}
+<br></br>
+Average Low Goals Scored in Teleop: {{ teleop_low_stats_one }}
+<br></br>
+Average High Goals Scored in Teleop: {{ teleop_high_stats_one }}
+<br></br>
+<table style="width:100%">
+<tr>
+  <th></th>
+  <th>Portcullis</th>
+  <th>Drawbridge</th>
+  <th>Cheval de Frise</th>
+  <th>Moat</th>
+  <th>Sallyport</th>
+  <th>Rough Terrain</th>
+  <th>Low Bar</th>
+  <th>Ramparts</th>
+</tr>
+<tr>
+<td><b>Average Times Defense Crossed in Teleop</b></td>
+<td>{{ portc_stats_value_one }}</td>
+<td>{{ drawb_stats_value_one }}</td>
+<td>{{ cdf_stats_value_one }}</td>
+<td>{{ moat_stats_value_one }}</td>
+<td>{{ sallyp_stats_value_one }}</td>
+<td>{{ rought_stats_value_one }}</td>
+<td>{{ lowbar_stats_value_one }}</td>
+<td>{{ ramparts_stats_value_one }}</td>
+</tr>
+<tr>
+<td><b>Percent of Matches Robot Gets Stuck on Defense in Teleop</b></td>
+<td>{{ portc_stuck_stats_one }}</td>
+<td>{{ drawb_stuck_stats_one }}</td>
+<td>{{ cdf_stuck_stats_one }}</td>
+<td>{{ moat_stuck_stats_one }}</td>
+<td>{{ sallyp_stuck_stats_one }}</td>
+<td>{{ rought_stuck_stats_one }}</td>
+<td>{{ lowbar_stuck_stats_one }}</td>
+<td>{{ ramparts_stuck_stats_one }}</td>
+</tr>
+</table>
+<br></br>
+Percent of Matches Robot Tries to Hang: {{ hang_value_one }}
+<br></br>
+Percent of Successful Hangs: {{ hang_success_stats_one }}
+<br></br>
+Percent of Matches Robot Doesn't Try to Hang: {{ hang_fail_one }}
+<br></br>
+Percent of Matches Robot Plays Defense: {{ played_def_stats_one }}
+<br></br></p>
+<p>{% for team in team_two %}
+Team Number:  {{ team }}
+{% endfor %}
+<br></br>
+Drivetrain:
+{% for drive in drivetrain_two %}
+{{ drive }}
+{% endfor %}
+<br></br>
+Number of Motors:
+{% for motor in motors_two %}
+{{ motor }}
+{% endfor %}
+<br></br>
+Gear Reduction:
+{% for gear in gear_reduc_two %}
+{{ gear }}
+{% endfor %}
+<br></br>
+Notes:
+{% for note in notes_two %}
+{{ note }}
+{% endfor %}
+<br></br>
+Average Low Goals Scored in Autonomous: {{ auton_low_stats_two }}
+<br></br>
+Average High Goals Scored in Autonomous: {{ auton_high_stats_two }}
+<br></br>
+Defenses Reached in Autonomous:
+{% for defense in auton_def_reached_values_two %}
+{{ defense }},
+{% endfor %}
+ <br></br>
+Defenses Crossed in Autonomous:
+{% for crossed in auton_def_crossed_values_two %}
+{{ crossed }},
+{% endfor %}
+<br></br>
+Average Low Goals Scored in Teleop: {{ teleop_low_stats_two }}
+<br></br>
+Average High Goals Scored in Teleop: {{ teleop_high_stats_two }}
+<br></br>
+<table style="width:100%">
+<tr>
+  <th></th>
+  <th>Portcullis</th>
+  <th>Drawbridge</th>
+  <th>Cheval de Frise</th>
+  <th>Moat</th>
+  <th>Sallyport</th>
+  <th>Rough Terrain</th>
+  <th>Low Bar</th>
+  <th>Ramparts</th>
+</tr>
+<tr>
+<td><b>Average Times Defense Crossed in Teleop</b></td>
+<td>{{ portc_stats_value_two }}</td>
+<td>{{ drawb_stats_value_two }}</td>
+<td>{{ cdf_stats_value_two }}</td>
+<td>{{ moat_stats_value_two }}</td>
+<td>{{ sallyp_stats_value_two }}</td>
+<td>{{ rought_stats_value_two }}</td>
+<td>{{ lowbar_stats_value_two }}</td>
+<td>{{ ramparts_stats_value_two }}</td>
+</tr>
+<tr>
+<td><b>Percent of Matches Robot Gets Stuck on Defense in Teleop</b></td>
+<td>{{ portc_stuck_percent_two }}</td>
+<td>{{ drawb_stuck_percent_two }}</td>
+<td>{{ cdf_stuck_percent_two }}</td>
+<td>{{ moat_stuck_percent_two }}</td>
+<td>{{ sallyp_stuck_percent_two }}</td>
+<td>{{ rought_stuck_percent_two }}</td>
+<td>{{ lowbar_stuck_percent_two }}</td>
+<td>{{ ramparts_stuck_percent_two }}</td>
+</tr>
+</table>
+<br></br>
+Percent of Matches Robot Tries to Hang: {{ hang_value_two }}
+<br></br>
+Percent of Successful Hangs: {{ hang_success_stats_two }}
+<br></br>
+Percent of Matches Robot Doesn't Try to Hang: {{ hang_fail_percent_two }}
+<br></br>
+Percent of Matches Robot Plays Defense: {{ played_def_stats_two }}
+<br></br></p>
+<a href="{% url 'home' %}">Back to Home</a>

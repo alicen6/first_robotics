@@ -37,6 +37,6 @@ urlpatterns = [
     url(r'^thanks/', get_thanks, name='thanks'),
     url(r'^drive/', get_extra, name='drive'),
     url(r'^team-compare/$', team_compare, name='team-compare'),
-    url(r'^team-compare/(?P<team_number>[0-9]+)/$',
+    url(r'^team-compare/(?P<first_team>[0-9]+)/(?P<second_team>[0-9]+)/$',
         views.team_compare_info, name='team-compare-info')
 ]
