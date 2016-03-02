@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
-from .views import get_name, get_match, team_stats_from_team_number, team_stats, get_home, get_thanks, team_raw_stats, get_extra, team_compare
+from .views import get_name, get_match, team_stats_from_team_number, team_stats, get_home, get_thanks, team_raw_stats, get_extra, team_compare, event_info, teams_by_event
 
 
 urlpatterns = [
@@ -38,5 +38,8 @@ urlpatterns = [
     url(r'^drive/', get_extra, name='drive'),
     url(r'^team-compare/$', team_compare, name='team-compare'),
     url(r'^team-compare/(?P<first_team>[0-9]+)/(?P<second_team>[0-9]+)/$',
-        views.team_compare_info, name='team-compare-info')
+        views.team_compare_info, name='team-compare-info'),
+    url(r'^event-info/$', event_info, name='event-select'),
+    url(r'^event-info/(?P<shorthand>.+)/$',
+        views.teams_by_event, name='event-info'),
 ]

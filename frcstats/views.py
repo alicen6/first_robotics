@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, render_to_response, get_object_or
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, modelform_factory
 from .models import Team, Match, Drive, TeamsByEvent, Event
-from forms import MatchForm, DriveForm, EventForm
+from forms import MatchForm, DriveForm
 from django.views.generic import View
 from django import forms
 from .choices import auton_def_choices
@@ -923,7 +923,8 @@ def team_compare_info(request, first_team, second_team):
             played_def_stats_two = played_def(played_def_values_two)
             hang_value_two = hang_total(
                 hang_input_values_two, hang_success_values_two, hang_fail_values_two)
-            hang_fail_percent_two = hang_fail(hang_input_values_two, hang_fail_values_two)
+            hang_fail_percent_two = hang_fail(
+                hang_input_values_two, hang_fail_values_two)
             auton_low_stats_two = auto_lows(auton_low_values_two)
             auton_high_stats_two = auto_highs(auton_high_values_two)
             teleop_low_stats_two = teleop_lows(teleop_low_values_two)
@@ -999,13 +1000,36 @@ def team_compare_info(request, first_team, second_team):
         })
 
 
-def event_info(request, shorthand):
-    shorthand = TeamsByEvent.objects.filter(shorthand=shorthand)
-    info = TeamsByEvent.objects.raw('SELECT event_name, team_number \
+def event_info(request):
+    class EventForm(forms.Form):
+        event_name = forms.CharField()
+    if request.method == 'GET':
+        form = EventForm()
+    else:
+        # A POST request: Handle Form Upload
+        form = EventForm(request.POST)
+        # If data is valid, proceeds to create a new post and redirect the user
+        if form.is_valid():
+            event_name = form.cleaned_data['event_name']
+
+            def event_get(event_name):
+                s = TeamsByEvent.objects.filter(event_name=event_name)
+                print s[0].shorthand
+                return s[0].shorthand
+            shorthand = event_get(event_name)
+            return HttpResponseRedirect('/event-info/' + str(shorthand))
+        else:
+            return render(request, 'event-select.html', {'event_form': form})
+    return render(request, 'event-select.html', {'event_form': form})
+
+
+def teams_by_event(request, shorthand):
+    code = TeamsByEvent.objects.filter(shorthand=shorthand)
+    for event in TeamsByEvent.objects.raw('SELECT event_name, team_number \
                                FROM teams_by_event \
-                               WHERE team_number IN(SELECT team_number \
-                                                    FROM teams_by_event \
-                                                    WHERE shorthand= % s', [shorthand])
-    return render(request, 'event-info.html', {
-        'info': info,
-    })
+                               WHERE team_number IN \
+                               (SELECT team_number \
+                                FROM teams_by_event) \
+                                WHERE shorthand= % s', [code])
+    print (event.team_number, event.event_name)
+    return render(request, 'event-info.html', {'info': info})
