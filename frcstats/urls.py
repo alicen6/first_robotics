@@ -19,7 +19,9 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
-from .views import get_name, get_match, team_stats_from_team_number, team_stats, get_home, get_thanks, team_raw_stats, get_extra, team_compare, event_info, teams_by_event
+from .views import (
+    get_name, get_match, team_stats_from_team_number, team_stats, get_home,
+    get_thanks, team_raw_stats, get_extra, team_compare, event_info, teams_by_event)
 
 
 urlpatterns = [

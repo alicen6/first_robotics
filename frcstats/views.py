@@ -7,6 +7,7 @@ from forms import MatchForm, DriveForm
 from django.views.generic import View
 from django import forms
 from .choices import auton_def_choices
+from django.db import connection
 
 
 def get_name(request):
@@ -1006,15 +1007,11 @@ def event_info(request):
     if request.method == 'GET':
         form = EventForm()
     else:
-        # A POST request: Handle Form Upload
         form = EventForm(request.POST)
-        # If data is valid, proceeds to create a new post and redirect the user
         if form.is_valid():
             event_name = form.cleaned_data['event_name']
-
             def event_get(event_name):
                 s = TeamsByEvent.objects.filter(event_name=event_name)
-                print s[0].shorthand
                 return s[0].shorthand
             shorthand = event_get(event_name)
             return HttpResponseRedirect('/event-info/' + str(shorthand))
@@ -1024,12 +1021,18 @@ def event_info(request):
 
 
 def teams_by_event(request, shorthand):
-    code = TeamsByEvent.objects.filter(shorthand=shorthand)
-    for event in TeamsByEvent.objects.raw('SELECT event_name, team_number \
-                               FROM teams_by_event \
-                               WHERE team_number IN \
-                               (SELECT team_number \
-                                FROM teams_by_event) \
-                                WHERE shorthand= % s', [code])
-    print (event.team_number, event.event_name)
-    return render(request, 'event-info.html', {'info': info})
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT event_name, team_number
+            FROM teams_by_event
+            WHERE team_number IN (
+                SELECT team_number FROM teams_by_event
+                    WHERE shorthand = %s)
+            ORDER BY team_number
+    """, [shorthand])
+    event_team = cursor.fetchall()
+    cursor.close()
+    # print event_team
+    # results = TeamsByEvent.objects.raw(raw_query)
+    # print results
+    return render(request, 'event-info.html', {'events_and_teams': event_team})
