@@ -5,7 +5,7 @@ from choices import auton_def_choices, teleop_def_choices, defense_options, hang
 
 class TeamsByEvent(models.Model):
     team_number = models.IntegerField()
-    event_name = models.CharField(max_length=50)
+    event_name = models.CharField(max_length=100)
     shorthand = models.CharField(max_length=12)
 
     class Meta:
