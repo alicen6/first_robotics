@@ -1,4 +1,162 @@
+<style>
+h3 {
+  font-family: Verdana;
+}
+label {
+  font-family: Verdana;
+  font-size: 12px;
+}
+table {
+    border-collapse: collapse;
+
+}
+table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+    width: 960px;
+}
+a:link, a:visited {
+    background-color: #2F2933;
+    color: white;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana;
+    font-size: 12px;
+}
+a:hover, a:active {
+    background-color: #01A2A6;
+}
+</style>
+<h3>Select an Event</h3>
 <form method="post" action="">
   {% csrf_token %} {{ event_form }}
   <input type="submit" value="Submit" />
 </form>
+<p>Cuurently, I am working on adding autocomplete to the event selection field,
+  until then, I am providing a table of all events in this page. To select an
+  event, you must match exactly, including the "2016" on the end.</p>
+  <table>
+    <tr><td>Alamo Regional sponsored by Rackspace Hosting 2016</td>
+    <td>Arizona North Regional 2016</td>
+    <td>Arizona West Regional 2016</td>
+    <td>Arkansas Rock City Regional 2016</td>
+    <td>Australia Regional 2016</td>
+    <td>Bayou Regional 2016</td></tr>
+    <tr><td>Buckeye Regional 2016</td>
+    <td>CHS District - Central Maryland Event 2016</td>
+    <td>CHS District - Central Virginia Event 2016</td>
+    <td>CHS District - Greater DC Event 2016</td>
+    <td>CHS District - Hampton Roads Event 2016</td>
+    <td>CHS District - Northern Maryland Event 2016</td></tr>
+    <tr><td>CHS District - Northern Virginia Event 2016</td>
+    <td>CHS District - Southwest Virginia Event 2016</td>
+    <td>Central Illinois Regional 2016</td>
+    <td>Central Valley Regional 2016</td>
+    <td>Colorado Regional 2016</td>
+    <td>Dallas Regional 2016</td></tr>
+    <tr><td>FIM District - Ann Arbor Skyline Event 2016</td>
+    <td>FIM District - Center Line Event 2016</td>
+    <td>FIM District - East Kentwood Event 2016</td>
+    <td>FIM District - Escanaba Event 2016</td>
+    <td>FIM District - Howell Event 2016</td>
+    <td>FIM District - Kettering University Event #1 2016</td></tr>
+    <tr><td>FIM District - Kettering University Event #2 2016</td>
+    <td>FIM District - Lake Superior State University Event 2016</td>
+    <td>FIM District - Lakeview Event 2016</td>
+    <td>FIM District - Lansing Event 2016</td>
+    <td>FIM District - Livonia Event 2016</td>
+    <td>FIM District - Marysville Event 2016</td></tr>
+    <tr><td>FIM District - Midland Event 2016</td>
+    <td>FIM District - Southfield Event 2016</td>
+    <td>FIM District - St. Joseph Event 2016</td>
+    <td>FIM District - Standish-Sterling Event 2016</td>
+    <td>FIM District - Traverse City Event 2016</td>
+    <td>FIM District - Troy Event 2016</td></tr>
+    <tr><td>FIM District - Waterford Event 2016</td>
+    <td>FIM District - West Michigan Event 2016</td>
+    <td>FIM District - Woodhaven Event 2016</td>
+    <td>FRC Festival de Robotique - Montreal Regional 2016</td>
+    <td>Finger Lakes Regional  2016</td>
+    <td>Greater Kansas City Regional 2016</td></tr>
+    <tr><td>Greater Pittsburgh Regional 2016</td>
+    <td>Greater Toronto Central Regional 2016</td>
+    <td>Greater Toronto East Regional  2016</td>
+    <td>Hawaii Regional 2016</td>
+    <td>Hub City Regional 2016</td>
+    <td>IN District - Perry Meridian Event 2016</td></tr>
+    <tr><td>IN District - Tippecanoe Event 2016</td>
+    <td>IN District - Walker Warren Event 2016</td>
+    <td>Idaho Regional 2016</td>
+    <td>Iowa Regional 2016</td>
+    <td>Israel Regional 2016</td>
+    <td>Lake Superior Regional 2016</td></tr>
+    <tr><td>Las Vegas Regional 2016</td>
+    <td>Lone Star Regional 2016</td>
+    <td>Los Angeles Regional 2016</td>
+    <td>MAR District - Bridgewater-Raritan Event 2016</td>
+    <td>MAR District - Hatboro-Horsham Event 2016</td>
+    <td>MAR District - Montgomery Event 2016</td></tr>
+    <tr><td>MAR District - Mt. Olive Event 2016</td>
+    <td>MAR District - Seneca Event 2016</td>
+    <td>MAR District - Springside Chestnut Hill Event 2016</td>
+    <td>MAR District - Westtown Event 2016</td>
+    <td>Mexico City Regional  2016</td>
+    <td>Midwest Regional 2016</td></tr>
+    <tr><td>Minnesota 10000 Lakes Regional 2016</td>
+    <td>Minnesota North Star Regional 2016</td>
+    <td>NC District - Campbell University/Johnston Community College Event 2016</td>
+    <td>NC District - Guilford County Event 2016</td>
+    <td>NC District - UNC Asheville Event 2016</td>
+    <td>NC District - Wake County Event 2016</td></tr>
+    <tr><td>NC FIRST Robotics State Championship 2016</td>
+    <td>NE District - Boston Event 2016</td>
+    <td>NE District - Granite State Event 2016</td>
+    <td>NE District - Hartford Event 2016</td>
+    <td>NE District - North Shore Event 2016</td>
+    <td>NE District - Pine Tree Event 2016</td></tr>
+    <tr><td>NE District - Rhode Island Event 2016</td>
+    <td>NE District - UMass-Dartmouth Event 2016</td>
+    <td>NE District - UNH Event 2016</td>
+    <td>NE District - WPI Event 2016</td>
+    <td>NE District - Waterbury Event 2016</td>
+    <td>New England District Championship 2016</td></tr>
+    <tr><td>New York City Regional 2016</td>
+    <td>New York Tech Valley Regional 2016</td>
+    <td>North Bay Regional 2016</td>
+    <td>Northern Lights Regional 2016</td>
+    <td>Oklahoma Regional  2016</td>
+    <td>Orange County Regional 2016</td></tr>
+    <tr><td>Orlando Regional 2016</td>
+    <td>PCH District - Albany Event 2016</td>
+    <td>PCH District - Columbus Event 2016</td>
+    <td>PCH District - Dalton Event 2016</td>
+    <td>PCH District - Kennesaw Event 2016</td>
+    <td>PNW District - Auburn Event 2016</td></tr>
+    <tr><td>PNW District - Auburn Mountainview Event 2016</td>
+    <td>PNW District - Central Washington University Event 2016</td>
+    <td>PNW District - Clackamas Academy of Industrial Science Event 2016</td>
+    <td>PNW District - Glacier Peak Event 2016</td>
+    <td>PNW District - Mount Vernon Event 2016</td>
+    <td>PNW District - Philomath Event 2016</td></tr>
+    <tr><td>PNW District - West Valley Event 2016</td>
+    <td>PNW District - Wilsonville Event 2016</td>
+    <td>Palmetto Regional 2016</td>
+    <td>Queen City Regional 2016</td>
+    <td>Rocket City Regional 2016</td>
+    <td>SBPLI Long Island Regional 2016</td></tr>
+    <tr><td>Sacramento Regional 2016</td>
+    <td>San Diego Regional 2016</td>
+    <td>Silicon Valley Regional presented by Google.org 2016</td>
+    <td>Smoky Mountains Regional 2016</td>
+    <td>South Florida Regional  2016</td>
+    <td>St. Louis Regional 2016</td></tr>
+    <tr>
+    <td>Utah Regional 2016</td>
+    <td>Ventura Regional 2016</td>
+    <td>Waterloo Regional  2016</td>
+    <td>Western Canada Regional 2016</td>
+    <td>Windsor Essex Great Lakes Regional 2016</td>
+    <td>Wisconsin Regional 2016</td></tr>
+  </table>
