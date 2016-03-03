@@ -1,7 +1,11 @@
 from collections import OrderedDict
 
 
+<<<<<<< HEAD
 auton_def_choices = OrderedDict(
+=======
+event_choices = OrderedDict(
+>>>>>>> dev
     [
         ('2016txsa', 'Alamo Regional sponsored by Rackspace Hosting 2016')
         ('2016azfl', 'Arizona North Regional 2016')

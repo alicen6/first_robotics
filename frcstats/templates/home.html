@@ -1,26 +1,49 @@
 {% csrf_token %}
 <style>
-a:link, a:visited {
+  a,
+  a:link {
     background-color: #2F2933;
     color: white;
+    margin: 6px;
     padding: 14px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-family: Verdana;
-}
-a:hover, a:active {
-    background-color: #01A2A6;
-}
-h3 {
-  font-family: Verdana;
+  }
 
-}
+  a:hover,
+  a:active {
+    background-color: #01A2A6;
+  }
+
+  h3 {
+    font-family: Verdana;
+  }
 </style>
 <h3>FRCStats Home Page</h2>
+<<<<<<< HEAD
 <p><a href="{% url 'match' %}">Input Match Info</a>
 <a href="{% url 'team-stats' %}">Look Up Team Stats</a></p>
 <p><a href="{% url 'team-raw-stats' %}">Look Up Team Match Info</a>
 <a href="{% url 'drive' %}">Add Drivetrain Info</a></p>
 <br></br>
 <a href=https://github.com/alicen6/first_robotics/issues>Report a Bug or Suggest a Feature</a>
+=======
+<p id="identifiers">
+<br>
+<a href="{% url 'match' %}">Input Match Info</a>
+<br>
+<a href="{% url 'team-stats' %}">Look Up Team Stats</a>
+<br>
+<a href="{% url 'team-raw-stats' %}">Look Up Team Match Info</a>
+<br>
+<a href="{% url 'drive' %}">Add Drivetrain Info</a>
+<br>
+<a href="{% url 'team-compare' %}">Compare Two Teams</a>
+<br>
+<a href="{% url 'event-select'%}">Lookup Teams By Event</a>
+<br>
+<a href=https://github.com/alicen6/first_robotics/issues>Report a Bug or Suggest a Feature</a>
+</p>
+>>>>>>> dev

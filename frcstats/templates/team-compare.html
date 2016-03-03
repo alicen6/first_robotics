@@ -1,6 +1,7 @@
 <!-- Where you can compare stats on two teams -->
 {% csrf_token %}
 <style>
+<<<<<<< HEAD
 h3 {
   font-family: Verdana;
 }
@@ -15,6 +16,29 @@ table, th, td {
     font-size: 12px;
 }
 a:link, a:visited {
+=======
+  h3 {
+    font-family: Verdana;
+  }
+
+  p {
+    font-family: Verdana;
+    font-size: 12px;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+    font-size: 12px;
+    width: 600px;
+  }
+
+  a:link,
+  a:visited {
+>>>>>>> dev
     background-color: #2F2933;
     color: white;
     padding: 4px 6px;
@@ -23,6 +47,7 @@ a:link, a:visited {
     display: inline-block;
     font-family: Verdana;
     font-size: 12px;
+<<<<<<< HEAD
 }
 a:hover, a:active {
     background-color: #01A2A6;
@@ -201,4 +226,220 @@ Percent of Matches Robot Doesn't Try to Hang: {{ hang_fail_percent_two }}
 <br></br>
 Percent of Matches Robot Plays Defense: {{ played_def_stats_two }}
 <br></br></p>
+=======
+  }
+
+  a:hover,
+  a:active {
+    background-color: #01A2A6;
+  }
+</style>
+<h3>Team Stats</h3>
+<p>
+  <table>
+    <tr>
+      <th>Team Number</th>
+      <td>
+        {% for team in team_one %} {{ team }} {% endfor %}</td>
+      <td>{% for team in team_two %} {{ team }} {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <th>Drivetrain:</th>
+      <td>
+        {% for drive in drivetrain_one %} {{ drive }} {% endfor %}</td>
+      <td>{% for drive in drivetrain_two %} {{ drive }} {% endfor %}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Number of Motors:</th>
+      <td>
+        {% for motor in motors_one %} {{ motor }} {% endfor %}</td>
+      <td>{% for motor in motors_two %} {{ motor }} {% endfor %}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Gear Reduction:</th>
+      <td>
+        {% for gear in gear_reduc_one %} {{ gear }} {% endfor %}</td>
+      <td>{% for gear in gear_reduc_two %} {{ gear }} {% endfor %}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Notes:</th>
+      <td>
+        {% for note in notes_one %} {{ note }} {% endfor %}</td>
+      <td>
+        {% for note in notes_two %} {{ note }} {% endfor %}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Average Low Goals Scored in Autonomous:</th>
+      <td>
+        {{ auton_low_stats_one }}</td>
+      <td>{{ auton_low_stats_two }}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Average High Goals Scored in Autonomous:</th>
+      <td>
+        {{ auton_high_stats_one }}</td>
+      <td>{{ auton_high_stats_two }}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Defenses Reached in Autonomous:</th>
+      <td>
+        {% for defense in auton_def_reached_values_one %} {{ defense }}, {% endfor %}</td>
+      <td>{% for defense in auton_def_reached_values_two %} {{ defense }}, {% endfor %}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Defenses Crossed in Autonomous:</th>
+      <td>
+        {% for crossed in auton_def_crossed_values_one %} {{ crossed }}, {% endfor %}</td>
+      <td>{% for crossed in auton_def_crossed_values_two %} {{ crossed }}, {% endfor %}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Average Low Goals Scored in Teleop:</th>
+      <td>
+        {{ teleop_low_stats_one }}</td>
+      <td>{{ teleop_low_stats_two }}
+      </td>
+    </tr>
+
+    <tr>
+      <th>Average High Goals Scored in Teleop:</th>
+      <td>
+        {{ teleop_high_stats_one }}</td>
+      <td>{{ teleop_high_stats_two }}
+      </td>
+    </tr>
+  </table>
+  <br></br>
+  <table>
+    <tr>
+      <th>Team Number</th>
+      <td colspan="2">
+        {% for team in team_one %} {{ team }} {% endfor %}</td>
+      <td colspan="2">{% for team in team_two %} {{ team }} {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><b>Average Times Defense Crossed in Teleop</b></td>
+      <td><b>Percent of Matches Robot Gets Stuck on Defense in Teleop</b></td>
+      <td><b>Average Times Defense Crossed in Teleop</b></td>
+      <td><b>Percent of Matches Robot Gets Stuck on Defense in Teleop</b></td>
+    </tr>
+    <tr>
+      <th>Portcullis</th>
+      <td>{{ portc_stats_value_one }}</td>
+      <td>{{ portc_stuck_stats_one }}</td>
+      <td>{{ portc_stats_value_two }}</td>
+      <td>{{ portc_stuck_percent_two }}</td>
+    </tr>
+
+    <tr>
+      <th>Drawbridge</th>
+      <td>{{ drawb_stats_value_one }}</td>
+      <td>{{ drawb_stuck_stats_one }}</td>
+      <td>{{ drawb_stats_value_two }}</td>
+      <td>{{ drawb_stuck_percent_two }}</td>
+    </tr>
+
+    <tr>
+      <th>Cheval de Frise</th>
+      <td>{{ cdf_stats_value_one }}</td>
+      <td>{{ cdf_stuck_stats_one }}</td>
+      <td>{{ cdf_stats_value_two }}</td>
+      <td>{{ cdf_stuck_percent_two }}</td>
+    </tr>
+
+    <tr>
+      <th>Moat</th>
+      <td>{{ moat_stats_value_one }}</td>
+      <td>{{ moat_stuck_stats_one }}</td>
+      <td>{{ moat_stats_value_two }}</td>
+      <td>{{ moat_stuck_percent_two }}</td>
+    </tr>
+
+    <tr>
+      <th>Sallyport</th>
+      <td>{{ sallyp_stats_value_one }}</td>
+      <td>{{ sallyp_stuck_stats_one }}</td>
+      <td>{{ sallyp_stats_value_two }}</td>
+      <td>{{ sallyp_stuck_percent_two }}</td>
+    </tr>
+
+    <tr>
+      <th>Rough Terrain</th>
+      <td>{{ rought_stats_value_one }}</td>
+      <td>{{ rought_stuck_stats_one }}</td>
+      <td>{{ rought_stats_value_two }}</td>
+      <td>{{ rought_stuck_percent_two }}</td>
+    </tr>
+
+    <tr>
+      <th>Lowbar</th>
+      <td>{{ lowbar_stats_value_one }}</td>
+      <td>{{ lowbar_stuck_stats_one }}</td>
+      <td>{{ lowbar_stats_value_two }}</td>
+      <td>{{ lowbar_stuck_percent_two }}</td>
+    </tr>
+
+    <tr>
+      <th>Ramparts</th>
+      <td>{{ ramparts_stats_value_one }}</td>
+      <td>{{ ramparts_stuck_stats_one }}</td>
+      <td>{{ ramparts_stats_value_two }}</td>
+      <td>{{ ramparts_stuck_percent_two }}</td>
+    </tr>
+  </table>
+  <br></br>
+  <table>
+    <tr>
+      <th>Team Number</th>
+      <td>
+        {% for team in team_one %} {{ team }} {% endfor %}</td>
+      <td>{% for team in team_two %} {{ team }} {% endfor %}
+      </td>
+    </tr>
+    <th>
+      Percent of Matches Robot Tries to Hang:</th>
+    <td>
+      {{ hang_value_one }}</td>
+    <td>
+      {{ hang_value_two }}</td>
+    </tr>
+    <th>Percent of Successful Hangs:</th>
+    <td>
+      {{ hang_success_stats_one }}</td>
+    <td>
+      {{ hang_success_stats_two }}</td>
+    </tr>
+    <th>Percent of Matches Robot Doesn't Try to Hang:</th>
+    <td>
+      {{ hang_fail_one }}</td>
+    <td>
+      {{ hang_fail_percent_two }}</td>
+    </tr>
+    <th>Percent of Matches Robot Plays Defense:</th>
+    <td>
+      {{ played_def_stats_one }}</td>
+    <td>
+      {{ played_def_stats_two }}</td>
+    </tr>
+  </table>
+</p>
+>>>>>>> dev
 <a href="{% url 'home' %}">Back to Home</a>

@@ -1,5 +1,6 @@
 {% csrf_token %}
 <style>
+<<<<<<< HEAD
 h3 {
   font-family: Verdana;
 }
@@ -14,6 +15,33 @@ table, th, td {
     font-size: 12px;
 }
 a:link, a:visited {
+=======
+  #event-list {
+    font-size: 12px;
+    font-family: Verdana;
+  }
+  h3 {
+    font-family: Verdana;
+  }
+
+  p {
+    font-family: Verdana;
+    font-size: 12px;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+    font-size: 12px;
+    width: 600px;
+  }
+
+  a:link,
+  a:visited {
+>>>>>>> dev
     background-color: #2F2933;
     color: white;
     padding: 4px 6px;
@@ -22,6 +50,7 @@ a:link, a:visited {
     display: inline-block;
     font-family: Verdana;
     font-size: 12px;
+<<<<<<< HEAD
 }
 a:hover, a:active {
     background-color: #01A2A6;
@@ -29,3 +58,26 @@ a:hover, a:active {
 </style>
 <h3>Event Information</h3>
 {{ info }}
+=======
+  }
+
+  a:hover,
+  a:active {
+    background-color: #01A2A6;
+  }
+</style>
+<h3>Event Information</h3>
+<table id="event-list">
+  <tr>
+    <th>Event</th>
+    <th>Team Number</th>
+  </tr>
+  {% for event, team in events_and_teams %}
+  <tr>
+    <td>{{ event }}</td>
+    <td>{{ team }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<a href="{% url 'home' %}">Back to Home</a>
+>>>>>>> dev
