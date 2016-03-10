@@ -21,7 +21,8 @@ from django.contrib import admin
 from . import views
 from .views import (
     get_name, get_match, team_stats_from_team_number, team_stats, get_home,
-    get_thanks, team_raw_stats, get_extra, team_compare, event_info, teams_by_event)
+    get_thanks, team_raw_stats, get_extra, team_compare, event_info, teams_by_event,
+    battle_match, battle_match_results)
 
 
 urlpatterns = [
@@ -44,4 +45,7 @@ urlpatterns = [
     url(r'^event-info/$', event_info, name='event-select'),
     url(r'^event-info/(?P<shorthand>.+)/$',
         views.teams_by_event, name='event-info'),
+    url(r'^alliance-select/$', battle_match, name='alliance-select'),
+    url(r'^alliance-select/(?P<red_one>[0-9]+)/(?P<red_two>[0-9]+)/(?P<red_three>[0-9]+)_(?P<blue_one>[0-9]+)/(?P<blue_two>[0-9]+)/(?P<blue_three>[0-9]+)/$',
+        views.battle_match_results, name='battle-match-results'),
 ]

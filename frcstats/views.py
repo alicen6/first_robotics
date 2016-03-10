@@ -1036,3 +1036,32 @@ def teams_by_event(request, shorthand):
     # results = TeamsByEvent.objects.raw(raw_query)
     # print results
     return render(request, 'event-info.html', {'events_and_teams': event_team})
+
+
+def battle_match(request):
+    class TeamNumberForm(forms.Form):
+        red_one = forms.IntegerField()
+        red_two = forms.IntegerField()
+        red_three = forms.IntegerField()
+        blue_one = forms.IntegerField()
+        blue_two = forms.IntegerField()
+        blue_three = forms.IntegerField()
+    if request.method == 'GET':
+        form = TeamNumberForm()
+    else:
+        # A POST request: Handle Form Upload
+        form = TeamNumberForm(request.POST)
+        # If data is valid, proceeds to create a new post and redirect the user
+        if form.is_valid():
+            red_one = abs(form.cleaned_data['red_one'])
+            red_two = abs(form.cleaned_data['red_two'])
+            red_three = abs(form.cleaned_data['red_three'])
+            blue_one = abs(form.cleaned_data['blue_one'])
+            blue_two = abs(form.cleaned_data['blue_two'])
+            blue_three = abs(form.cleaned_data['blue_three'])
+            return HttpResponseRedirect('/battle_match/' + str(red_one) + "/" + str(red_two) + "/" + str(red_three) + "_" + str(blue_one) + "/" + str(blue_two) + "/" + str(blue_three))
+    return render(request, 'alliance-select.html', {'team_number_form': form})
+
+
+def battle_match_results():
+    pass
