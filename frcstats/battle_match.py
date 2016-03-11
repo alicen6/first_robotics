@@ -1270,19 +1270,80 @@ def breach_scoring(one_portc_stats_value,
             rought_score = 5
         else:
             rought_score = 0
-    defense_total = sum(lowbar_score + cdf_score + portc_score + moat_score + ramparts_score + drawb_score + sallyp_score + rockwall_score + rought_score)
+    defense_total = sum(lowbar_score + cdf_score + portc_score + moat_score +
+                        ramparts_score + drawb_score + sallyp_score + rockwall_score + rought_score)
     if defense_total >= 40:
         breach_confirm = 'BREACH'
     else:
         breach_confirm = 'NO BREACH'
 
-red_score.append(auto_goal_score(red_one_auton_low_values, red_one_auton_high_values))
-red_score.append(teleop_goal_score(red_one_teleop_low_values, red_one_teleop_high_values))
-red_score.append(auto_def_score(###))
-red_score.append(hang_score(###))
-red_score.append(breach_scoring(###))
-red_score.append(auto_goal_score(red_two_auton_low_values, red_two_auton_high_values))
-red_score.append(teleop_goal_score(red_two_teleop_low_values, red_two_teleop_high_values))
-red_score.append(auto_def_score(###))
-red_score.append(hang_score(###))
-red_score.append(breach_scoring(###))
+red_score.append(auto_goal_score(
+    red_one_auton_low_values, red_one_auton_high_values))
+red_score.append(teleop_goal_score(
+    red_one_teleop_low_values, red_one_teleop_high_values))
+red_score.append(auto_def_score(
+    red_one_auton_def_reached_values, red_one_auton_def_crossed_values))
+red_score.append(auto_goal_score(
+    red_two_auton_low_values, red_two_auton_high_values))
+red_score.append(teleop_goal_score(
+    red_two_teleop_low_values, red_two_teleop_high_values))
+red_score.append(auto_def_score(
+    red_two_auton_def_reached_values, red_two_auton_def_crossed_values))
+red_score.append(auto_goal_score(
+    red_three_auton_low_values, red_three_auton_high_values))
+red_score.append(teleop_goal_score(
+    red_three_teleop_low_values, red_three_teleop_high_values))
+red_score.append(auto_def_score(
+    red_three_auton_def_reached_values, red_three_auton_def_crossed_values))
+red_score.append(hang_score(red_one_hang_success_stats, red_one_hang_value,
+                            red_two_hang_success_stats, red_two_hang_value,
+                            red_three_hang_success_stats, red_three_hang_value))
+red_score.append(breach_scoring(red_one_portc_stats_value,
+                                red_one_drawb_stats_value, red_one_cdf_stats_value,
+                                red_one_moat_stats_value, red_one_sallyp_stats_value,
+                                red_one_rought_stats_value, red_one_lowbar_stats_value,
+                                red_one_ramparts_stats_value, red_one_rockwall_stats_value,
+                                red_two_portc_stats_value, red_two_drawb_stats_value,
+                                red_two_cdf_stats_value, red_two_moat_stats_value,
+                                red_two_sallyp_stats_value, red_two_rought_stats_value,
+                                red_two_lowbar_stats_value, red_two_ramparts_stats_value,
+                                red_two_rockwall_stats_value, red_three_portc_stats_value,
+                                red_three_drawb_stats_value, red_three_cdf_stats_value,
+                                red_three_moat_stats_value, red_three_sallyp_stats_value,
+                                red_three_rought_stats_value, red_three_lowbar_stats_value,
+                                red_three_ramparts_stats_value, red_three_rockwall_stats_value))
+blue_score.append(auto_goal_score(
+    blue_one_auton_low_values, blue_one_auton_high_values))
+blue_score.append(teleop_goal_score(
+    blue_one_teleop_low_values, blue_one_teleop_high_values))
+blue_score.append(auto_def_score(
+    blue_one_auton_def_reached_values, blue_one_auton_def_crossed_values))
+blue_score.append(auto_goal_score(
+    blue_two_auton_low_values, blue_two_auton_high_values))
+blue_score.append(teleop_goal_score(
+    blue_two_teleop_low_values, blue_two_teleop_high_values))
+blue_score.append(auto_def_score(
+    blue_two_auton_def_reached_values, blue_two_auton_def_crossed_values))
+blue_score.append(auto_goal_score(
+    blue_three_auton_low_values, blue_three_auton_high_values))
+blue_score.append(teleop_goal_score(
+    blue_three_teleop_low_values, blue_three_teleop_high_values))
+blue_score.append(auto_def_score(
+    blue_three_auton_def_reached_values, blue_three_auton_def_crossed_values))
+blue_score.append(hang_score(blue_one_hang_success_stats, blue_one_hang_value,
+                             blue_two_hang_success_stats, blue_two_hang_value,
+                             blue_three_hang_success_stats, blue_three_hang_value))
+blue_score.append(breach_scoring(blue_one_portc_stats_value,
+                                 blue_one_drawb_stats_value, blue_one_cdf_stats_value,
+                                 blue_one_moat_stats_value, blue_one_sallyp_stats_value,
+                                 blue_one_rought_stats_value, blue_one_lowbar_stats_value,
+                                 blue_one_ramparts_stats_value, blue_one_rockwall_stats_value,
+                                 blue_two_portc_stats_value, blue_two_drawb_stats_value,
+                                 blue_two_cdf_stats_value, blue_two_moat_stats_value,
+                                 blue_two_sallyp_stats_value, blue_two_rought_stats_value,
+                                 blue_two_lowbar_stats_value, blue_two_ramparts_stats_value,
+                                 blue_two_rockwall_stats_value, blue_three_portc_stats_value,
+                                 blue_three_drawb_stats_value, blue_three_cdf_stats_value,
+                                 blue_three_moat_stats_value, blue_three_sallyp_stats_value,
+                                 blue_three_rought_stats_value, blue_three_lowbar_stats_value,
+                                 blue_three_ramparts_stats_value, blue_three_rockwall_stats_value))
