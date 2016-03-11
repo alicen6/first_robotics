@@ -1,22 +1,29 @@
-red= Team.objects.filter(team_number=red_one)
+import random
+
+red = Team.objects.filter(team_number=red_one)
 red_two = Team.objects.filter(team_number=red_two)
 red_three = Team.objects.filter(team_number=red_three)
 
-blue= Team.objects.filter(team_number=blue_one)
+blue = Team.objects.filter(team_number=blue_one)
 blue_two = Team.objects.filter(team_number=blue_two)
 blue_three = Team.objects.filter(team_number=blue_three)
+
 
 def auto_lows(value):
     return sum(value) / float(len(value))
 
+
 def auto_highs(value):
     return sum(value) / float(len(value))
+
 
 def teleop_lows(value):
     return sum(value) / float(len(value))
 
+
 def teleop_highs(value):
     return sum(value) / float(len(value))
+
 
 def defense_cross(value, miss):
     if len(value) != 0 or len(miss) != 0:
@@ -24,27 +31,32 @@ def defense_cross(value, miss):
     else:
         return 0
 
+
 def defense_stuck(value, miss, stuck):
     if len(value) != 0 or len(miss) != 0:
-        return str(int((float(len(stuck)) /
-                        (float(len(value)) + float(len(miss)) + float(len(stuck)))) * 100)) + "%"
+        return int((float(len(stuck)) /
+                    (float(len(value)) + float(len(miss)) + float(len(stuck)))) * 100)
     else:
         return 0
 
+
 def played_def(value):
-    return str(int((sum(value) / float(len(value))) * 100)) + "%"
+    return int((sum(value) / float(len(value))) * 100)
+
 
 def hang_total(input, success, fail):
-    return str(int((float(len(input)) + float(len(success))) / (float(len(input)) + float(len(success)) + float(len(fail))) * 100)) + "%"
+    return int((float(len(input)) + float(len(success))) / (float(len(input)) + float(len(success)) + float(len(fail))) * 100)
+
 
 def hang_succes(input, success):
-    return str(int(float(len(success)) / (float(len(success)) + float(len(input))) * 100)) + "%"
+    return int(float(len(success)) / (float(len(success)) + float(len(input))) * 100)
+
 
 def hang_fail(input, fail):
     if len(input) != 0 or len(fail) != 0:
-        return str(int(float(len(fail)) / (float(len(fail)) + float(len(input))) * 100)) + "%"
+        return int(float(len(fail)) / (float(len(fail)) + float(len(input))) * 100)
     else:
-        return "0%"
+        return 0
 
 if len(red) > 0 or len(blue) > 0:
     red_one_matches = Match.objects.filter(team_number=red_one[0].id)
@@ -368,51 +380,53 @@ for match in red_one_matches:
         red_one_rockwall_stats.append(match.teleop_rockwall)
     else:
         pass
-red_one_portc_stats_value= defense_cross(
+red_one_portc_stats_value = defense_cross(
     red_one_portc_stats, red_one_portc_miss_stats)
-red_one_portc_stuck_stats= defense_stuck(
+red_one_portc_stuck_stats = defense_stuck(
     red_one_portc_stats, red_one_portc_miss_stats, red_one_portc_stuck_stats)
-red_one_drawb_stats_value= defense_cross(
+red_one_drawb_stats_value = defense_cross(
     red_one_drawb_stats, red_one_drawb_miss_stats)
-red_one_drawb_stuck_stats= defense_stuck(
+red_one_drawb_stuck_stats = defense_stuck(
     red_one_drawb_stats, red_one_drawb_miss_stats, red_one_drawb_stuck_stats)
-red_one_cdf_stats_value= defense_cross(red_one_cdf_stats, red_one_cdf_miss_stats)
-red_one_cdf_stuck_stats= defense_stuck(
+red_one_cdf_stats_value = defense_cross(
+    red_one_cdf_stats, red_one_cdf_miss_stats)
+red_one_cdf_stuck_stats = defense_stuck(
     red_one_cdf_stats, red_one_cdf_miss_stats, red_one_cdf_stuck_stats)
-red_one_moat_stats_value= defense_cross(
+red_one_moat_stats_value = defense_cross(
     red_one_moat_stats, red_one_moat_miss_stats)
-red_one_moat_stuck_stats= defense_stuck(
+red_one_moat_stuck_stats = defense_stuck(
     red_one_moat_stats, red_one_moat_miss_stats, red_one_moat_stuck_stats)
-red_one_sallyp_stats_value= defense_cross(
+red_one_sallyp_stats_value = defense_cross(
     red_one_sallyp_stats, red_one_sallyp_miss_stats)
-red_one_sallyp_stuck_stats= defense_stuck(
+red_one_sallyp_stuck_stats = defense_stuck(
     red_one_sallyp_stats, red_one_sallyp_miss_stats, red_one_sallyp_stuck_stats)
-red_one_rought_stats_value= defense_cross(
+red_one_rought_stats_value = defense_cross(
     red_one_rought_stats, red_one_rought_miss_stats)
-red_one_rought_stuck_stats= defense_stuck(
+red_one_rought_stuck_stats = defense_stuck(
     red_one_rought_stats, red_one_rought_miss_stats, red_one_rought_stuck_stats)
-red_one_lowbar_stats_value= defense_cross(
+red_one_lowbar_stats_value = defense_cross(
     red_one_lowbar_stats, red_one_lowbar_miss_stats)
-red_one_lowbar_stuck_stats= defense_stuck(
+red_one_lowbar_stuck_stats = defense_stuck(
     red_one_lowbar_stats, red_one_lowbar_miss_stats, red_one_lowbar_stuck_stats)
-red_one_ramparts_stats_value= defense_cross(
+red_one_ramparts_stats_value = defense_cross(
     red_one_ramparts_stats, red_one_ramparts_miss_stats)
-red_one_ramparts_stuck_stats= defense_stuck(
+red_one_ramparts_stuck_stats = defense_stuck(
     red_one_ramparts_stats, red_one_ramparts_miss_stats, red_one_ramparts_stuck_stats)
-red_one_rockwall_stats_value= defense_cross(
+red_one_rockwall_stats_value = defense_cross(
     red_one_rockwall_stats, red_one_rockwall_miss_stats)
-red_one_rockwall_stuck_stats= defense_stuck(
+red_one_rockwall_stuck_stats = defense_stuck(
     red_one_rockwall_stats, red_one_rockwall_miss_stats, red_one_rockwall_stuck_stats)
-red_one_hang_success_stats= hang_succes(
+red_one_hang_success_stats = hang_succes(
     red_one_hang_input_values, red_one_hang_success_values)
-red_one_played_def_stats= played_def(red_one_played_def_values)
-red_one_hang_value= hang_total(
+red_one_played_def_stats = played_def(red_one_played_def_values)
+red_one_hang_value = hang_total(
     red_one_hang_input_values, red_one_hang_success_values, red_one_hang_fail_values)
-red_one_hang_fail= hang_fail(red_one_hang_input_values, red_one_hang_fail_values)
-red_one_auton_low_stats= auto_lows(red_one_auton_low_values)
-red_one_auton_high_stats= auto_highs(red_one_auton_high_values)
-red_one_teleop_low_stats= teleop_lows(red_one_teleop_low_values)
-red_one_teleop_high_stats= teleop_highs(red_one_teleop_high_values)
+red_one_hang_fail = hang_fail(
+    red_one_hang_input_values, red_one_hang_fail_values)
+red_one_auton_low_stats = auto_lows(red_one_auton_low_values)
+red_one_auton_high_stats = auto_highs(red_one_auton_high_values)
+red_one_teleop_low_stats = teleop_lows(red_one_teleop_low_values)
+red_one_teleop_high_stats = teleop_highs(red_one_teleop_high_values)
 
 for match in red_two_matches:
     red_two_auton_low_values.append(match.auton_low_goals)
@@ -500,51 +514,53 @@ for match in red_two_matches:
         red_two_rockwall_stats.append(match.teleop_rockwall)
     else:
         pass
-red_two_portc_stats_value= defense_cross(
+red_two_portc_stats_value = defense_cross(
     red_two_portc_stats, red_two_portc_miss_stats)
-red_two_portc_stuck_stats= defense_stuck(
+red_two_portc_stuck_stats = defense_stuck(
     red_two_portc_stats, red_two_portc_miss_stats, red_two_portc_stuck_stats)
-red_two_drawb_stats_value= defense_cross(
+red_two_drawb_stats_value = defense_cross(
     red_two_drawb_stats, red_two_drawb_miss_stats)
-red_two_drawb_stuck_stats= defense_stuck(
+red_two_drawb_stuck_stats = defense_stuck(
     red_two_drawb_stats, red_two_drawb_miss_stats, red_two_drawb_stuck_stats)
-red_two_cdf_stats_value= defense_cross(red_two_cdf_stats, red_two_cdf_miss_stats)
-red_two_cdf_stuck_stats= defense_stuck(
+red_two_cdf_stats_value = defense_cross(
+    red_two_cdf_stats, red_two_cdf_miss_stats)
+red_two_cdf_stuck_stats = defense_stuck(
     red_two_cdf_stats, red_two_cdf_miss_stats, red_two_cdf_stuck_stats)
-red_two_moat_stats_value= defense_cross(
+red_two_moat_stats_value = defense_cross(
     red_two_moat_stats, red_two_moat_miss_stats)
-red_two_moat_stuck_stats= defense_stuck(
+red_two_moat_stuck_stats = defense_stuck(
     red_two_moat_stats, red_two_moat_miss_stats, red_two_moat_stuck_stats)
-red_two_sallyp_stats_value= defense_cross(
+red_two_sallyp_stats_value = defense_cross(
     red_two_sallyp_stats, red_two_sallyp_miss_stats)
-red_two_sallyp_stuck_stats= defense_stuck(
+red_two_sallyp_stuck_stats = defense_stuck(
     red_two_sallyp_stats, red_two_sallyp_miss_stats, red_two_sallyp_stuck_stats)
-red_two_rought_stats_value= defense_cross(
+red_two_rought_stats_value = defense_cross(
     red_two_rought_stats, red_two_rought_miss_stats)
-red_two_rought_stuck_stats= defense_stuck(
+red_two_rought_stuck_stats = defense_stuck(
     red_two_rought_stats, red_two_rought_miss_stats, red_two_rought_stuck_stats)
-red_two_lowbar_stats_value= defense_cross(
+red_two_lowbar_stats_value = defense_cross(
     red_two_lowbar_stats, red_two_lowbar_miss_stats)
-red_two_lowbar_stuck_stats= defense_stuck(
+red_two_lowbar_stuck_stats = defense_stuck(
     red_two_lowbar_stats, red_two_lowbar_miss_stats, red_two_lowbar_stuck_stats)
-red_two_ramparts_stats_value= defense_cross(
+red_two_ramparts_stats_value = defense_cross(
     red_two_ramparts_stats, red_two_ramparts_miss_stats)
-red_two_ramparts_stuck_stats= defense_stuck(
+red_two_ramparts_stuck_stats = defense_stuck(
     red_two_ramparts_stats, red_two_ramparts_miss_stats, red_two_ramparts_stuck_stats)
-red_two_rockwall_stats_value= defense_cross(
+red_two_rockwall_stats_value = defense_cross(
     red_two_rockwall_stats, red_two_rockwall_miss_stats)
-red_two_rockwall_stuck_stats= defense_stuck(
+red_two_rockwall_stuck_stats = defense_stuck(
     red_two_rockwall_stats, red_two_rockwall_miss_stats, red_two_rockwall_stuck_stats)
-red_two_hang_success_stats= hang_succes(
+red_two_hang_success_stats = hang_succes(
     red_two_hang_input_values, red_two_hang_success_values)
-red_two_played_def_stats= played_def(red_two_played_def_values)
-red_two_hang_value= hang_total(
+red_two_played_def_stats = played_def(red_two_played_def_values)
+red_two_hang_value = hang_total(
     red_two_hang_input_values, red_two_hang_success_values, red_two_hang_fail_values)
-red_two_hang_fail= hang_fail(red_two_hang_input_values, red_two_hang_fail_values)
-red_two_auton_low_stats= auto_lows(red_two_auton_low_values)
-red_two_auton_high_stats= auto_highs(red_two_auton_high_values)
-red_two_teleop_low_stats= teleop_lows(red_two_teleop_low_values)
-red_two_teleop_high_stats= teleop_highs(red_two_teleop_high_values)
+red_two_hang_fail = hang_fail(
+    red_two_hang_input_values, red_two_hang_fail_values)
+red_two_auton_low_stats = auto_lows(red_two_auton_low_values)
+red_two_auton_high_stats = auto_highs(red_two_auton_high_values)
+red_two_teleop_low_stats = teleop_lows(red_two_teleop_low_values)
+red_two_teleop_high_stats = teleop_highs(red_two_teleop_high_values)
 
 for match in red_three_matches:
     red_three_auton_low_values.append(match.auton_low_goals)
@@ -632,51 +648,53 @@ for match in red_three_matches:
         red_three_rockwall_stats.append(match.teleop_rockwall)
     else:
         pass
-red_three_portc_stats_value= defense_cross(
+red_three_portc_stats_value = defense_cross(
     red_three_portc_stats, red_three_portc_miss_stats)
-red_three_portc_stuck_stats= defense_stuck(
+red_three_portc_stuck_stats = defense_stuck(
     red_three_portc_stats, red_three_portc_miss_stats, red_three_portc_stuck_stats)
-red_three_drawb_stats_value= defense_cross(
+red_three_drawb_stats_value = defense_cross(
     red_three_drawb_stats, red_three_drawb_miss_stats)
-red_three_drawb_stuck_stats= defense_stuck(
+red_three_drawb_stuck_stats = defense_stuck(
     red_three_drawb_stats, red_three_drawb_miss_stats, red_three_drawb_stuck_stats)
-red_three_cdf_stats_value= defense_cross(red_three_cdf_stats, red_three_cdf_miss_stats)
-red_three_cdf_stuck_stats= defense_stuck(
+red_three_cdf_stats_value = defense_cross(
+    red_three_cdf_stats, red_three_cdf_miss_stats)
+red_three_cdf_stuck_stats = defense_stuck(
     red_three_cdf_stats, red_three_cdf_miss_stats, red_three_cdf_stuck_stats)
-red_three_moat_stats_value= defense_cross(
+red_three_moat_stats_value = defense_cross(
     red_three_moat_stats, red_three_moat_miss_stats)
-red_three_moat_stuck_stats= defense_stuck(
+red_three_moat_stuck_stats = defense_stuck(
     red_three_moat_stats, red_three_moat_miss_stats, red_three_moat_stuck_stats)
-red_three_sallyp_stats_value= defense_cross(
+red_three_sallyp_stats_value = defense_cross(
     red_three_sallyp_stats, red_three_sallyp_miss_stats)
-red_three_sallyp_stuck_stats= defense_stuck(
+red_three_sallyp_stuck_stats = defense_stuck(
     red_three_sallyp_stats, red_three_sallyp_miss_stats, red_three_sallyp_stuck_stats)
-red_three_rought_stats_value= defense_cross(
+red_three_rought_stats_value = defense_cross(
     red_three_rought_stats, red_three_rought_miss_stats)
-red_three_rought_stuck_stats= defense_stuck(
+red_three_rought_stuck_stats = defense_stuck(
     red_three_rought_stats, red_three_rought_miss_stats, red_three_rought_stuck_stats)
-red_three_lowbar_stats_value= defense_cross(
+red_three_lowbar_stats_value = defense_cross(
     red_three_lowbar_stats, red_three_lowbar_miss_stats)
-red_three_lowbar_stuck_stats= defense_stuck(
+red_three_lowbar_stuck_stats = defense_stuck(
     red_three_lowbar_stats, red_three_lowbar_miss_stats, red_three_lowbar_stuck_stats)
-red_three_ramparts_stats_value= defense_cross(
+red_three_ramparts_stats_value = defense_cross(
     red_three_ramparts_stats, red_three_ramparts_miss_stats)
-red_three_ramparts_stuck_stats= defense_stuck(
+red_three_ramparts_stuck_stats = defense_stuck(
     red_three_ramparts_stats, red_three_ramparts_miss_stats, red_three_ramparts_stuck_stats)
-red_three_rockwall_stats_value= defense_cross(
+red_three_rockwall_stats_value = defense_cross(
     red_three_rockwall_stats, red_three_rockwall_miss_stats)
-red_three_rockwall_stuck_stats= defense_stuck(
+red_three_rockwall_stuck_stats = defense_stuck(
     red_three_rockwall_stats, red_three_rockwall_miss_stats, red_three_rockwall_stuck_stats)
-red_three_hang_success_stats= hang_succes(
+red_three_hang_success_stats = hang_succes(
     red_three_hang_input_values, red_three_hang_success_values)
-red_three_played_def_stats= played_def(red_three_played_def_values)
-red_three_hang_value= hang_total(
+red_three_played_def_stats = played_def(red_three_played_def_values)
+red_three_hang_value = hang_total(
     red_three_hang_input_values, red_three_hang_success_values, red_three_hang_fail_values)
-red_three_hang_fail= hang_fail(red_three_hang_input_values, red_three_hang_fail_values)
-red_three_auton_low_stats= auto_lows(red_three_auton_low_values)
-red_three_auton_high_stats= auto_highs(red_three_auton_high_values)
-red_three_teleop_low_stats= teleop_lows(red_three_teleop_low_values)
-red_three_teleop_high_stats= teleop_highs(red_three_teleop_high_values)
+red_three_hang_fail = hang_fail(
+    red_three_hang_input_values, red_three_hang_fail_values)
+red_three_auton_low_stats = auto_lows(red_three_auton_low_values)
+red_three_auton_high_stats = auto_highs(red_three_auton_high_values)
+red_three_teleop_low_stats = teleop_lows(red_three_teleop_low_values)
+red_three_teleop_high_stats = teleop_highs(red_three_teleop_high_values)
 
 for match in blue_one_matches:
     blue_one_auton_low_values.append(match.auton_low_goals)
@@ -764,51 +782,53 @@ for match in blue_one_matches:
         blue_one_rockwall_stats.append(match.teleop_rockwall)
     else:
         pass
-blue_one_portc_stats_value= defense_cross(
+blue_one_portc_stats_value = defense_cross(
     blue_one_portc_stats, blue_one_portc_miss_stats)
-blue_one_portc_stuck_stats= defense_stuck(
+blue_one_portc_stuck_stats = defense_stuck(
     blue_one_portc_stats, blue_one_portc_miss_stats, blue_one_portc_stuck_stats)
-blue_one_drawb_stats_value= defense_cross(
+blue_one_drawb_stats_value = defense_cross(
     blue_one_drawb_stats, blue_one_drawb_miss_stats)
-blue_one_drawb_stuck_stats= defense_stuck(
+blue_one_drawb_stuck_stats = defense_stuck(
     blue_one_drawb_stats, blue_one_drawb_miss_stats, blue_one_drawb_stuck_stats)
-blue_one_cdf_stats_value= defense_cross(blue_one_cdf_stats, blue_one_cdf_miss_stats)
-blue_one_cdf_stuck_stats= defense_stuck(
+blue_one_cdf_stats_value = defense_cross(
+    blue_one_cdf_stats, blue_one_cdf_miss_stats)
+blue_one_cdf_stuck_stats = defense_stuck(
     blue_one_cdf_stats, blue_one_cdf_miss_stats, blue_one_cdf_stuck_stats)
-blue_one_moat_stats_value= defense_cross(
+blue_one_moat_stats_value = defense_cross(
     blue_one_moat_stats, blue_one_moat_miss_stats)
-blue_one_moat_stuck_stats= defense_stuck(
+blue_one_moat_stuck_stats = defense_stuck(
     blue_one_moat_stats, blue_one_moat_miss_stats, blue_one_moat_stuck_stats)
-blue_one_sallyp_stats_value= defense_cross(
+blue_one_sallyp_stats_value = defense_cross(
     blue_one_sallyp_stats, blue_one_sallyp_miss_stats)
-blue_one_sallyp_stuck_stats= defense_stuck(
+blue_one_sallyp_stuck_stats = defense_stuck(
     blue_one_sallyp_stats, blue_one_sallyp_miss_stats, blue_one_sallyp_stuck_stats)
-blue_one_rought_stats_value= defense_cross(
+blue_one_rought_stats_value = defense_cross(
     blue_one_rought_stats, blue_one_rought_miss_stats)
-blue_one_rought_stuck_stats= defense_stuck(
+blue_one_rought_stuck_stats = defense_stuck(
     blue_one_rought_stats, blue_one_rought_miss_stats, blue_one_rought_stuck_stats)
-blue_one_lowbar_stats_value= defense_cross(
+blue_one_lowbar_stats_value = defense_cross(
     blue_one_lowbar_stats, blue_one_lowbar_miss_stats)
-blue_one_lowbar_stuck_stats= defense_stuck(
+blue_one_lowbar_stuck_stats = defense_stuck(
     blue_one_lowbar_stats, blue_one_lowbar_miss_stats, blue_one_lowbar_stuck_stats)
-blue_one_ramparts_stats_value= defense_cross(
+blue_one_ramparts_stats_value = defense_cross(
     blue_one_ramparts_stats, blue_one_ramparts_miss_stats)
-blue_one_ramparts_stuck_stats= defense_stuck(
+blue_one_ramparts_stuck_stats = defense_stuck(
     blue_one_ramparts_stats, blue_one_ramparts_miss_stats, blue_one_ramparts_stuck_stats)
-blue_one_rockwall_stats_value= defense_cross(
+blue_one_rockwall_stats_value = defense_cross(
     blue_one_rockwall_stats, blue_one_rockwall_miss_stats)
-blue_one_rockwall_stuck_stats= defense_stuck(
+blue_one_rockwall_stuck_stats = defense_stuck(
     blue_one_rockwall_stats, blue_one_rockwall_miss_stats, blue_one_rockwall_stuck_stats)
-blue_one_hang_success_stats= hang_succes(
+blue_one_hang_success_stats = hang_succes(
     blue_one_hang_input_values, blue_one_hang_success_values)
-blue_one_played_def_stats= played_def(blue_one_played_def_values)
-blue_one_hang_value= hang_total(
+blue_one_played_def_stats = played_def(blue_one_played_def_values)
+blue_one_hang_value = hang_total(
     blue_one_hang_input_values, blue_one_hang_success_values, blue_one_hang_fail_values)
-blue_one_hang_fail= hang_fail(blue_one_hang_input_values, blue_one_hang_fail_values)
-blue_one_auton_low_stats= auto_lows(blue_one_auton_low_values)
-blue_one_auton_high_stats= auto_highs(blue_one_auton_high_values)
-blue_one_teleop_low_stats= teleop_lows(blue_one_teleop_low_values)
-blue_one_teleop_high_stats= teleop_highs(blue_one_teleop_high_values)
+blue_one_hang_fail = hang_fail(
+    blue_one_hang_input_values, blue_one_hang_fail_values)
+blue_one_auton_low_stats = auto_lows(blue_one_auton_low_values)
+blue_one_auton_high_stats = auto_highs(blue_one_auton_high_values)
+blue_one_teleop_low_stats = teleop_lows(blue_one_teleop_low_values)
+blue_one_teleop_high_stats = teleop_highs(blue_one_teleop_high_values)
 
 for match in blue_two_matches:
     blue_two_auton_low_values.append(match.auton_low_goals)
@@ -896,51 +916,53 @@ for match in blue_two_matches:
         blue_two_rockwall_stats.append(match.teleop_rockwall)
     else:
         pass
-blue_two_portc_stats_value= defense_cross(
+blue_two_portc_stats_value = defense_cross(
     blue_two_portc_stats, blue_two_portc_miss_stats)
-blue_two_portc_stuck_stats= defense_stuck(
+blue_two_portc_stuck_stats = defense_stuck(
     blue_two_portc_stats, blue_two_portc_miss_stats, blue_two_portc_stuck_stats)
-blue_two_drawb_stats_value= defense_cross(
+blue_two_drawb_stats_value = defense_cross(
     blue_two_drawb_stats, blue_two_drawb_miss_stats)
-blue_two_drawb_stuck_stats= defense_stuck(
+blue_two_drawb_stuck_stats = defense_stuck(
     blue_two_drawb_stats, blue_two_drawb_miss_stats, blue_two_drawb_stuck_stats)
-blue_two_cdf_stats_value= defense_cross(blue_two_cdf_stats, blue_two_cdf_miss_stats)
-blue_two_cdf_stuck_stats= defense_stuck(
+blue_two_cdf_stats_value = defense_cross(
+    blue_two_cdf_stats, blue_two_cdf_miss_stats)
+blue_two_cdf_stuck_stats = defense_stuck(
     blue_two_cdf_stats, blue_two_cdf_miss_stats, blue_two_cdf_stuck_stats)
-blue_two_moat_stats_value= defense_cross(
+blue_two_moat_stats_value = defense_cross(
     blue_two_moat_stats, blue_two_moat_miss_stats)
-blue_two_moat_stuck_stats= defense_stuck(
+blue_two_moat_stuck_stats = defense_stuck(
     blue_two_moat_stats, blue_two_moat_miss_stats, blue_two_moat_stuck_stats)
-blue_two_sallyp_stats_value= defense_cross(
+blue_two_sallyp_stats_value = defense_cross(
     blue_two_sallyp_stats, blue_two_sallyp_miss_stats)
-blue_two_sallyp_stuck_stats= defense_stuck(
+blue_two_sallyp_stuck_stats = defense_stuck(
     blue_two_sallyp_stats, blue_two_sallyp_miss_stats, blue_two_sallyp_stuck_stats)
-blue_two_rought_stats_value= defense_cross(
+blue_two_rought_stats_value = defense_cross(
     blue_two_rought_stats, blue_two_rought_miss_stats)
-blue_two_rought_stuck_stats= defense_stuck(
+blue_two_rought_stuck_stats = defense_stuck(
     blue_two_rought_stats, blue_two_rought_miss_stats, blue_two_rought_stuck_stats)
-blue_two_lowbar_stats_value= defense_cross(
+blue_two_lowbar_stats_value = defense_cross(
     blue_two_lowbar_stats, blue_two_lowbar_miss_stats)
-blue_two_lowbar_stuck_stats= defense_stuck(
+blue_two_lowbar_stuck_stats = defense_stuck(
     blue_two_lowbar_stats, blue_two_lowbar_miss_stats, blue_two_lowbar_stuck_stats)
-blue_two_ramparts_stats_value= defense_cross(
+blue_two_ramparts_stats_value = defense_cross(
     blue_two_ramparts_stats, blue_two_ramparts_miss_stats)
-blue_two_ramparts_stuck_stats= defense_stuck(
+blue_two_ramparts_stuck_stats = defense_stuck(
     blue_two_ramparts_stats, blue_two_ramparts_miss_stats, blue_two_ramparts_stuck_stats)
-blue_two_rockwall_stats_value= defense_cross(
+blue_two_rockwall_stats_value = defense_cross(
     blue_two_rockwall_stats, blue_two_rockwall_miss_stats)
-blue_two_rockwall_stuck_stats= defense_stuck(
+blue_two_rockwall_stuck_stats = defense_stuck(
     blue_two_rockwall_stats, blue_two_rockwall_miss_stats, blue_two_rockwall_stuck_stats)
-blue_two_hang_success_stats= hang_succes(
+blue_two_hang_success_stats = hang_succes(
     blue_two_hang_input_values, blue_two_hang_success_values)
-blue_two_played_def_stats= played_def(blue_two_played_def_values)
-blue_two_hang_value= hang_total(
+blue_two_played_def_stats = played_def(blue_two_played_def_values)
+blue_two_hang_value = hang_total(
     blue_two_hang_input_values, blue_two_hang_success_values, blue_two_hang_fail_values)
-blue_two_hang_fail= hang_fail(blue_two_hang_input_values, blue_two_hang_fail_values)
-blue_two_auton_low_stats= auto_lows(blue_two_auton_low_values)
-blue_two_auton_high_stats= auto_highs(blue_two_auton_high_values)
-blue_two_teleop_low_stats= teleop_lows(blue_two_teleop_low_values)
-blue_two_teleop_high_stats= teleop_highs(blue_two_teleop_high_values)
+blue_two_hang_fail = hang_fail(
+    blue_two_hang_input_values, blue_two_hang_fail_values)
+blue_two_auton_low_stats = auto_lows(blue_two_auton_low_values)
+blue_two_auton_high_stats = auto_highs(blue_two_auton_high_values)
+blue_two_teleop_low_stats = teleop_lows(blue_two_teleop_low_values)
+blue_two_teleop_high_stats = teleop_highs(blue_two_teleop_high_values)
 
 for match in blue_three_matches:
     blue_three_auton_low_values.append(match.auton_low_goals)
@@ -1028,51 +1050,239 @@ for match in blue_three_matches:
         blue_three_rockwall_stats.append(match.teleop_rockwall)
     else:
         pass
-blue_three_portc_stats_value= defense_cross(
+blue_three_portc_stats_value = defense_cross(
     blue_three_portc_stats, blue_three_portc_miss_stats)
-blue_three_portc_stuck_stats= defense_stuck(
+blue_three_portc_stuck_stats = defense_stuck(
     blue_three_portc_stats, blue_three_portc_miss_stats, blue_three_portc_stuck_stats)
-blue_three_drawb_stats_value= defense_cross(
+blue_three_drawb_stats_value = defense_cross(
     blue_three_drawb_stats, blue_three_drawb_miss_stats)
-blue_three_drawb_stuck_stats= defense_stuck(
+blue_three_drawb_stuck_stats = defense_stuck(
     blue_three_drawb_stats, blue_three_drawb_miss_stats, blue_three_drawb_stuck_stats)
-blue_three_cdf_stats_value= defense_cross(blue_three_cdf_stats, blue_three_cdf_miss_stats)
-blue_three_cdf_stuck_stats= defense_stuck(
+blue_three_cdf_stats_value = defense_cross(
+    blue_three_cdf_stats, blue_three_cdf_miss_stats)
+blue_three_cdf_stuck_stats = defense_stuck(
     blue_three_cdf_stats, blue_three_cdf_miss_stats, blue_three_cdf_stuck_stats)
-blue_three_moat_stats_value= defense_cross(
+blue_three_moat_stats_value = defense_cross(
     blue_three_moat_stats, blue_three_moat_miss_stats)
-blue_three_moat_stuck_stats= defense_stuck(
+blue_three_moat_stuck_stats = defense_stuck(
     blue_three_moat_stats, blue_three_moat_miss_stats, blue_three_moat_stuck_stats)
-blue_three_sallyp_stats_value= defense_cross(
+blue_three_sallyp_stats_value = defense_cross(
     blue_three_sallyp_stats, blue_three_sallyp_miss_stats)
-blue_three_sallyp_stuck_stats= defense_stuck(
+blue_three_sallyp_stuck_stats = defense_stuck(
     blue_three_sallyp_stats, blue_three_sallyp_miss_stats, blue_three_sallyp_stuck_stats)
-blue_three_rought_stats_value= defense_cross(
+blue_three_rought_stats_value = defense_cross(
     blue_three_rought_stats, blue_three_rought_miss_stats)
-blue_three_rought_stuck_stats= defense_stuck(
+blue_three_rought_stuck_stats = defense_stuck(
     blue_three_rought_stats, blue_three_rought_miss_stats, blue_three_rought_stuck_stats)
-blue_three_lowbar_stats_value= defense_cross(
+blue_three_lowbar_stats_value = defense_cross(
     blue_three_lowbar_stats, blue_three_lowbar_miss_stats)
-blue_three_lowbar_stuck_stats= defense_stuck(
+blue_three_lowbar_stuck_stats = defense_stuck(
     blue_three_lowbar_stats, blue_three_lowbar_miss_stats, blue_three_lowbar_stuck_stats)
-blue_three_ramparts_stats_value= defense_cross(
+blue_three_ramparts_stats_value = defense_cross(
     blue_three_ramparts_stats, blue_three_ramparts_miss_stats)
-blue_three_ramparts_stuck_stats= defense_stuck(
+blue_three_ramparts_stuck_stats = defense_stuck(
     blue_three_ramparts_stats, blue_three_ramparts_miss_stats, blue_three_ramparts_stuck_stats)
-blue_three_rockwall_stats_value= defense_cross(
+blue_three_rockwall_stats_value = defense_cross(
     blue_three_rockwall_stats, blue_three_rockwall_miss_stats)
-blue_three_rockwall_stuck_stats= defense_stuck(
+blue_three_rockwall_stuck_stats = defense_stuck(
     blue_three_rockwall_stats, blue_three_rockwall_miss_stats, blue_three_rockwall_stuck_stats)
-blue_three_hang_success_stats= hang_succes(
+blue_three_hang_success_stats = hang_succes(
     blue_three_hang_input_values, blue_three_hang_success_values)
-blue_three_played_def_stats= played_def(blue_three_played_def_values)
-blue_three_hang_value= hang_total(
+blue_three_played_def_stats = played_def(blue_three_played_def_values)
+blue_three_hang_value = hang_total(
     blue_three_hang_input_values, blue_three_hang_success_values, blue_three_hang_fail_values)
-blue_three_hang_fail= hang_fail(blue_three_hang_input_values, blue_three_hang_fail_values)
-blue_three_auton_low_stats= auto_lows(blue_three_auton_low_values)
-blue_three_auton_high_stats= auto_highs(blue_three_auton_high_values)
-blue_three_teleop_low_stats= teleop_lows(blue_three_teleop_low_values)
-blue_three_teleop_high_stats= teleop_highs(blue_three_teleop_high_values)
+blue_three_hang_fail = hang_fail(
+    blue_three_hang_input_values, blue_three_hang_fail_values)
+blue_three_auton_low_stats = auto_lows(blue_three_auton_low_values)
+blue_three_auton_high_stats = auto_highs(blue_three_auton_high_values)
+blue_three_teleop_low_stats = teleop_lows(blue_three_teleop_low_values)
+blue_three_teleop_high_stats = teleop_highs(blue_three_teleop_high_values)
 
 
 # next step is to develop actual scores from data about teams
+red_score = []
+blue_score = []
+
+
+def auto_goal_score(low, high):
+    low_num = round(low)
+    high_num = round(high)
+    return sum((low_num * 5) + (high_num * 10))
+
+
+def teleop_goal_score(low, high):
+    low_num = round(low)
+    high_num = round(high)
+    return sum((low_num * 2) + (high_num * 5))
+
+
+def auto_def_score(reach, cross):
+    if len(cross) > 0:
+        return 10
+    elif len(reach) > 0:
+        return 2
+    else:
+        return 0
+
+
+def hang_score(success_one, total_one, success_two, total_two, success_three, total_three):
+    one = random.random()
+    two = random.random()
+    three = random.random()
+    if one < success_one:
+        one_score = 15
+    elif one < total_one:
+        one_score = 5
+    else:
+        one_score = 0
+    if two < success_two:
+        two_score = 15
+    elif two < total_two:
+        two_score = 5
+    else:
+        two_score = 0
+    if three < success_three:
+        three_score = 15
+    elif three < total_three:
+        three_score = 5
+    else:
+        three_score = 0
+    if one_score > 0 and two_score > 0 and three_score > 0:
+        capture = 25
+    else:
+        capture = 0
+    hang_score_totals = sum(one_score + two_score + three_score + capture)
+
+
+def breach_scoring(one_portc_stats_value,
+                   one_drawb_stats_value,
+                   one_cdf_stats_value,
+                   one_moat_stats_value,
+                   one_sallyp_stats_value,
+                   one_rought_stats_value,
+                   one_lowbar_stats_value,
+                   one_ramparts_stats_value,
+                   one_rockwall_stats_value,
+                   two_portc_stats_value,
+                   two_drawb_stats_value,
+                   two_cdf_stats_value,
+                   two_moat_stats_value,
+                   two_sallyp_stats_value,
+                   two_rought_stats_value,
+                   two_lowbar_stats_value,
+                   two_ramparts_stats_value,
+                   two_rockwall_stats_value,
+                   three_portc_stats_value,
+                   three_drawb_stats_value,
+                   three_cdf_stats_value,
+                   three_moat_stats_value,
+                   three_sallyp_stats_value,
+                   three_rought_stats_value,
+                   three_lowbar_stats_value,
+                   three_ramparts_stats_value,
+                   three_rockwall_stats_value):
+
+    def_a = ['cheval de frise', 'portcullis']
+    def_b = ['moat', 'ramparts']
+    def_c = ['drawbridge', 'sallyport']
+    def_d = ['rockwall', 'rough terrain']
+    def_one = random.choice(def_a)
+    def_two = random.choice(def_b)
+    def_three = random.choice(def_c)
+    def_four = random.choice(def_d)
+    low_bar_total = round(one_lowbar_stats_value) + \
+        round(two_lowbar_stats_value) + round(three_lowbar_stats_value)
+    if lowbar_total > 2:
+        lowbar_score = 10
+    elif lowbar_total > 1:
+        lowbar_score = 5
+    else:
+        lowbar_score = 0
+    if def_a == 'cheval de frise':
+        cdf_total = round(one_cdf_stats_value) + \
+            round(two_cdf_stats_value) + round(three_cdf_stats_value)
+        if cdf_total >= 2:
+            cdf_score = 10
+        elif cdf_total >= 1:
+            cdf_score = 5
+        else:
+            cdf_score = 0
+    else:
+        portc_total = round(one_portc_stats_value) + \
+            round(two_portc_stats_value) + round(three_portc_stats_value)
+        if portc_total >= 2:
+            portc_score = 10
+        elif portc_total >= 1:
+            portc_score = 5
+        else:
+            portc_score = 0
+    if def_b == 'moat':
+        moat_total = round(one_moat_stats_value) + \
+            round(two_moat_stats_value) + round(three_moat_stats_value)
+        if moat_total >= 2:
+            moat_score = 10
+        elif moat_total >= 1:
+            moat_score = 5
+        else:
+            moat_score = 0
+    else:
+        ramparts_total = round(one_ramparts_stats_value) + round(
+            two_ramparts_stats_value) + round(three_ramparts_stats_value)
+        if ramparts_total >= 2:
+            ramparts_score = 10
+        elif ramparts_total >= 1:
+            ramparts_score = 5
+        else:
+            ramparts_score = 0
+    if def_c == 'drawbridge':
+        drawb_total = round(one_drawb_stats_value) + \
+            round(two_drawb_stats_value) + round(three_drawb_stats_value)
+        if drawb_total >= 2:
+            drawb_score = 10
+        elif drawb_total >= 1:
+            drawb_score = 5
+        else:
+            drawb_score = 0
+    else:
+        sallyp_total = round(one_sallyp_stats_value) + \
+            round(two_sallyp_stats_value) + round(three_sallyp_stats_value)
+        if sallyp_total >= 2:
+            sallyp_score = 10
+        elif sallyp_total >= 1:
+            sallyp_score = 5
+        else:
+            sallyp_score = 0
+    if def_d == 'rockwall':
+        rockwall_total = round(one_rockwall_stats_value) + round(
+            two_rockwall_stats_value) + round(three_rockwall_stats_value)
+        if rockwall_total >= 2:
+            rockwall_score = 10
+        elif rockwall_total >= 1:
+            rockwall_score = 5
+        else:
+            rockwall_score = 0
+    else:
+        rought_total = round(one_rought_stats_value) + \
+            round(two_rought_stats_value) + round(three_rought_stats_value)
+        if rought_total >= 2:
+            rought_score = 10
+        elif rought_total >= 1:
+            rought_score = 5
+        else:
+            rought_score = 0
+    defense_total = sum(lowbar_score + cdf_score + portc_score + moat_score + ramparts_score + drawb_score + sallyp_score + rockwall_score + rought_score)
+    if defense_total >= 40:
+        breach_confirm = 'BREACH'
+    else:
+        breach_confirm = 'NO BREACH'
+
+red_score.append(auto_goal_score(red_one_auton_low_values, red_one_auton_high_values))
+red_score.append(teleop_goal_score(red_one_teleop_low_values, red_one_teleop_high_values))
+red_score.append(auto_def_score(###))
+red_score.append(hang_score(###))
+red_score.append(breach_scoring(###))
+red_score.append(auto_goal_score(red_two_auton_low_values, red_two_auton_high_values))
+red_score.append(teleop_goal_score(red_two_teleop_low_values, red_two_teleop_high_values))
+red_score.append(auto_def_score(###))
+red_score.append(hang_score(###))
+red_score.append(breach_scoring(###))
