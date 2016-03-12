@@ -1347,3 +1347,6 @@ blue_score.append(breach_scoring(blue_one_portc_stats_value,
                                  blue_three_moat_stats_value, blue_three_sallyp_stats_value,
                                  blue_three_rought_stats_value, blue_three_lowbar_stats_value,
                                  blue_three_ramparts_stats_value, blue_three_rockwall_stats_value))
+
+red_score_total = sum(red_score)
+blue_score_total = sum(blue_score)
