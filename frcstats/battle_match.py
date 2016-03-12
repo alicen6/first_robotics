@@ -34,27 +34,27 @@ def defense_cross(value, miss):
 
 def defense_stuck(value, miss, stuck):
     if len(value) != 0 or len(miss) != 0:
-        return int((float(len(stuck)) /
-                    (float(len(value)) + float(len(miss)) + float(len(stuck)))) * 100)
+        return float(len(stuck)) /
+                    (float(len(value)) + float(len(miss)) + float(len(stuck)))
     else:
         return 0
 
 
 def played_def(value):
-    return int((sum(value) / float(len(value))) * 100)
+    return sum(value) / float(len(value))
 
 
 def hang_total(input, success, fail):
-    return int((float(len(input)) + float(len(success))) / (float(len(input)) + float(len(success)) + float(len(fail))) * 100)
+    return (float(len(input)) + float(len(success))) / (float(len(input)) + float(len(success)) + float(len(fail)))
 
 
 def hang_succes(input, success):
-    return int(float(len(success)) / (float(len(success)) + float(len(input))) * 100)
+    return float(len(success)) / (float(len(success)) + float(len(input)))
 
 
 def hang_fail(input, fail):
     if len(input) != 0 or len(fail) != 0:
-        return int(float(len(fail)) / (float(len(fail)) + float(len(input))) * 100)
+        return float(len(fail)) / (float(len(fail)) + float(len(input)))
     else:
         return 0
 
