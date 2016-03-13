@@ -8,6 +8,7 @@ from django.views.generic import View
 from django import forms
 from .choices import auton_def_choices
 from django.db import connection
+from battle_match import battle_match
 
 
 def get_name(request):
@@ -1059,9 +1060,9 @@ def battle_match(request):
             blue_one = abs(form.cleaned_data['blue_one'])
             blue_two = abs(form.cleaned_data['blue_two'])
             blue_three = abs(form.cleaned_data['blue_three'])
-            return HttpResponseRedirect('/battle_match/' + str(red_one) + "/" + str(red_two) + "/" + str(red_three) + "_" + str(blue_one) + "/" + str(blue_two) + "/" + str(blue_three))
+            return HttpResponseRedirect('/alliance-select/' + str(red_one) + "/" + str(red_two) + "/" + str(red_three) + "_" + str(blue_one) + "/" + str(blue_two) + "/" + str(blue_three))
     return render(request, 'alliance-select.html', {'team_number_form': form})
 
 
-def battle_match_results():
-    pass
+def battle_match_results(request, red_one, red_two, red_three, blue_one, blue_two, blue_three):
+    battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three)
