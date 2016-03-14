@@ -1039,7 +1039,7 @@ def teams_by_event(request, shorthand):
     return render(request, 'event-info.html', {'events_and_teams': event_team})
 
 
-def battle_match(request):
+def alliance_select(request):
     class TeamNumberForm(forms.Form):
         red_one = forms.IntegerField()
         red_two = forms.IntegerField()
@@ -1065,4 +1065,4 @@ def battle_match(request):
 
 
 def battle_match_results(request, red_one, red_two, red_three, blue_one, blue_two, blue_three):
-    battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three)
+    print battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three)
