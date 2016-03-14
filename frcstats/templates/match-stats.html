@@ -1,1 +1,19 @@
-{% csrf_token %} {{ red_score }}
+{% csrf_token %}
+<table>
+  <tr>
+    <th>RED ALLIANCE</th>
+    <th>BLUE ALLIANCE</th>
+  </tr>
+  <tr>
+    <td>{{ red_auto_total }}</td>
+    <td>{{ blue_auto_total }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_teleop_total }}</td>
+    <td>{{ blue_teleop_total }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_score_total }}</td>
+    <td>{{ blue_score_total }}</td>
+  </tr>
+</table>

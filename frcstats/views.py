@@ -1062,7 +1062,3 @@ def alliance_select(request):
             blue_three = abs(form.cleaned_data['blue_three'])
             return HttpResponseRedirect('/alliance-select/' + str(red_one) + "/" + str(red_two) + "/" + str(red_three) + "_" + str(blue_one) + "/" + str(blue_two) + "/" + str(blue_three))
     return render(request, 'alliance-select.html', {'team_number_form': form})
-
-
-def battle_match_results(request, red_one, red_two, red_three, blue_one, blue_two, blue_three):
-    print battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three)

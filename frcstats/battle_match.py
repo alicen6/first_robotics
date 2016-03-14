@@ -6,7 +6,7 @@ from .models import Team, Match
 import random
 
 
-def battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three):
+def battle_match(request, red_one, red_two, red_three, blue_one, blue_two, blue_three):
     red_one = Team.objects.filter(team_number=red_one)
     red_two = Team.objects.filter(team_number=red_two)
     red_three = Team.objects.filter(team_number=red_three)
@@ -1108,11 +1108,37 @@ def battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three):
     def auto_goal_score(low, high):
         low_num = round(low)
         high_num = round(high)
-        return (low_num * 5) + (high_num * 10)
+        goal_random = random.random()
+        if goal_random >= .5:
+            return high_num * 10
+        else:
+            return low_num * 5
 
     def teleop_goal_score(low, high):
         low_num = round(low)
         high_num = round(high)
+        low_random = random.random()
+        high_random = random.random()
+        if low_random >= .85:
+            low_num = round(low_num * 1.25)
+        elif low_random >= .75:
+            low_num = low_num
+        elif low_random >= .5:
+            low_num = round(low_num * .75)
+        elif low_random >= .25:
+            low_num = round(low_num * .6)
+        else:
+            low_num = round(low_num * .35)
+        if high_random >= .85:
+            high_num = round(high_num * 1.25)
+        elif high_random >= .75:
+            high_num = high_num
+        elif high_random >= .5:
+            high_num = round(high_num * .75)
+        elif high_random >= .25:
+            high_num = round(high_num * .6)
+        else:
+            high_num = round(high_num * .35)
         return (low_num * 2) + (high_num * 5)
 
     def auto_def_score(reach, cross):
@@ -1150,6 +1176,7 @@ def battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three):
         else:
             capture = 0
         hang_score_totals = one_score + two_score + three_score + capture
+        return hang_score_totals
 
     def breach_scoring(one_portc_stats_value,
                        one_drawb_stats_value,
@@ -1282,6 +1309,7 @@ def battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three):
             breach_confirm = 'BREACH'
         else:
             breach_confirm = 'NO BREACH'
+        return defense_total
 
     red_score.append(auto_goal_score(
         red_one_auton_low_stats, red_one_auton_high_stats))
@@ -1336,25 +1364,45 @@ def battle_match(red_one, red_two, red_three, blue_one, blue_two, blue_three):
         blue_three_teleop_low_stats, blue_three_teleop_high_stats))
     blue_score.append(auto_def_score(
         blue_three_auton_def_reached_values, blue_three_auton_def_crossed_values))
-    blue_score.append(hang_score(blue_one_hang_success_stats, blue_one_hang_value,
-                                 blue_two_hang_success_stats, blue_two_hang_value,
-                                 blue_three_hang_success_stats, blue_three_hang_value))
-    blue_score.append(breach_scoring(blue_one_portc_stats_value,
-                                     blue_one_drawb_stats_value, blue_one_cdf_stats_value,
-                                     blue_one_moat_stats_value, blue_one_sallyp_stats_value,
-                                     blue_one_rought_stats_value, blue_one_lowbar_stats_value,
-                                     blue_one_ramparts_stats_value, blue_one_rockwall_stats_value,
-                                     blue_two_portc_stats_value, blue_two_drawb_stats_value,
-                                     blue_two_cdf_stats_value, blue_two_moat_stats_value,
-                                     blue_two_sallyp_stats_value, blue_two_rought_stats_value,
-                                     blue_two_lowbar_stats_value, blue_two_ramparts_stats_value,
-                                     blue_two_rockwall_stats_value, blue_three_portc_stats_value,
-                                     blue_three_drawb_stats_value, blue_three_cdf_stats_value,
-                                     blue_three_moat_stats_value, blue_three_sallyp_stats_value,
-                                     blue_three_rought_stats_value, blue_three_lowbar_stats_value,
-                                     blue_three_ramparts_stats_value, blue_three_rockwall_stats_value))
+    blue_score.append(hang_score(
+        blue_one_hang_success_stats, blue_one_hang_value,
+        blue_two_hang_success_stats, blue_two_hang_value,
+        blue_three_hang_success_stats, blue_three_hang_value))
+    blue_score.append(breach_scoring(
+        blue_one_portc_stats_value, blue_one_drawb_stats_value,
+        blue_one_cdf_stats_value, blue_one_moat_stats_value,
+        blue_one_sallyp_stats_value, blue_one_rought_stats_value,
+        blue_one_lowbar_stats_value, blue_one_ramparts_stats_value,
+        blue_one_rockwall_stats_value, blue_two_portc_stats_value,
+        blue_two_drawb_stats_value, blue_two_cdf_stats_value,
+        blue_two_moat_stats_value, blue_two_sallyp_stats_value,
+        blue_two_rought_stats_value, blue_two_lowbar_stats_value,
+        blue_two_ramparts_stats_value, blue_two_rockwall_stats_value,
+        blue_three_portc_stats_value, blue_three_drawb_stats_value,
+        blue_three_cdf_stats_value, blue_three_moat_stats_value,
+        blue_three_sallyp_stats_value, blue_three_rought_stats_value,
+        blue_three_lowbar_stats_value, blue_three_ramparts_stats_value,
+        blue_three_rockwall_stats_value)
+    )
 
-    red_score_total = str(int(sum(red_score)))
-    blue_score_total = str(int(sum(blue_score)))
+    red_score_total = int(sum(red_score))
+    blue_score_total = int(sum(blue_score))
+    red_auto_total = int(red_score[0] + red_score[2] +
+                         red_score[3] + red_score[5] + red_score[6] + red_score[8])
+    blue_auto_total = int(blue_score[
+        0] + blue_score[2] + blue_score[3] + blue_score[5] + blue_score[6] + blue_score[8])
+    red_teleop_total = int(red_score_total - red_auto_total)
+    blue_teleop_total = int(blue_score_total - blue_auto_total)
 
-    return render(request, 'match-stats.html', {'red_score_total': red_score_total})
+    print red_teleop_total
+    print blue_teleop_total
+
+    return render(request, 'match-stats.html', {
+        'red_score_total': red_score_total,
+        'blue_score_total': blue_score_total,
+        'red_auto_total': red_auto_total,
+        'blue_auto_total': blue_auto_total,
+        'red_teleop_total': red_teleop_total,
+        'blue_teleop_total': blue_teleop_total
+    }
+    )

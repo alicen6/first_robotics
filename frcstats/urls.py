@@ -22,8 +22,8 @@ from . import views
 from .views import (
     get_name, get_match, team_stats_from_team_number, team_stats, get_home,
     get_thanks, team_raw_stats, get_extra, team_compare, event_info, teams_by_event,
-    alliance_select, battle_match_results)
-
+    alliance_select)
+from .battle_match import battle_match
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -47,5 +47,5 @@ urlpatterns = [
         views.teams_by_event, name='event-info'),
     url(r'^alliance-select/$', alliance_select, name='alliance-select'),
     url(r'^alliance-select/(?P<red_one>[0-9]+)/(?P<red_two>[0-9]+)/(?P<red_three>[0-9]+)_(?P<blue_one>[0-9]+)/(?P<blue_two>[0-9]+)/(?P<blue_three>[0-9]+)/$',
-        views.battle_match_results, name='battle-match-results'),
+        battle_match, name='battle-match-results'),
 ]
