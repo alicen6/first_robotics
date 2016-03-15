@@ -1421,6 +1421,12 @@ def battle_match(request, red_one, red_two, red_three, blue_one, blue_two, blue_
     blue_def_three = blue_breach_info[4]
     blue_def_four = blue_breach_info[5]
 
+    winner = ""
+    if red_score_total > blue_score_total:
+        winner = "RED ALLIANCE WINS"
+    else:
+        winner = "BLUE ALLIANCE WINS"
+
     return render(request, 'match-stats.html', {
         'red_score_total': red_score_total,
         'blue_score_total': blue_score_total,
@@ -1437,6 +1443,7 @@ def battle_match(request, red_one, red_two, red_three, blue_one, blue_two, blue_
         'blue_def_one': blue_def_one,
         'blue_def_two': blue_def_two,
         'blue_def_three': blue_def_three,
-        'blue_def_four': blue_def_four
+        'blue_def_four': blue_def_four,
+        'winner': winner
     }
     )
