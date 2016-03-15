@@ -1,12 +1,55 @@
+<style>
+h3 {
+  font-family: Verdana;
+}
+p {
+  font-family: Verdana;
+  font-size: 12px;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 6px;
+    font-size: 18px;
+}
+a:link, a:visited {
+    background-color: #2F2933;
+    color: white;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana;
+    font-size: 12px;
+}
+a:hover, a:active {
+    background-color: #01A2A6;
+}
+</style>
 {% csrf_token %}
 <table>
   <tr>
-    <th>RED ALLIANCE</th>
-    <th>BLUE ALLIANCE</th>
+    <th style = background-color:#E77471>RED ALLIANCE</th>
+    <th style = background-color:#87AFC7>BLUE ALLIANCE</th>
   </tr>
   <tr>
     <td>{{ red_auto_total }}</td>
     <td>{{ blue_auto_total }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_def_one }}</td><td>{{ blue_def_one }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_def_two }}</td><td>{{ blue_def_two }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_def_three }}</td><td>{{ blue_def_three }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_def_four }}</td><td>{{ blue_def_four }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_breach_confirm }}</td><td>{{ blue_breach_confirm }}</td>
   </tr>
   <tr>
     <td>{{ red_teleop_total }}</td>
@@ -17,3 +60,5 @@
     <td>{{ blue_score_total }}</td>
   </tr>
 </table>
+<br></br>
+<a href="{% url 'home' %}">Back to Home</a>

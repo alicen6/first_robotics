@@ -2,6 +2,8 @@
 <style>
   a,
   a:link {
+    width: 350px;
+    height: 25px;
     background-color: #2F2933;
     color: white;
     margin: 6px;
@@ -19,6 +21,7 @@
 
   h3 {
     font-family: Verdana;
+    margin-left: 90px;
   }
 </style>
 <h3>FRCStats Home Page</h2>
@@ -33,6 +36,8 @@
 <a href="{% url 'drive' %}">Add Drivetrain Info</a>
 <br>
 <a href="{% url 'team-compare' %}">Compare Two Teams</a>
+<br>
+<a href="{% url 'alliance-select' %}">Fantasy Match</a>
 <br>
 <a href="{% url 'event-select'%}">Lookup Teams By Event</a>
 <br>
