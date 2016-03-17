@@ -1,7 +1,7 @@
 <style>
 h3 {
   font-family: Verdana;
-  margin-left: 30px;
+  text-align: center;
 }
 p {
   font-family: Verdana;
@@ -28,17 +28,36 @@ a:hover, a:active {
 }
 </style>
 {% csrf_token %}
-<table>
+<table align="center">
   <tr>
-    <th style = background-color:#E77471>RED ALLIANCE</th>
-    <th style = background-color:#87AFC7>BLUE ALLIANCE</th>
+    <th style = background-color:#E77471; colspan="2">RED ALLIANCE</th>
+    <th style = background-color:#87AFC7; colspan="2">BLUE ALLIANCE</th>
   </tr>
   <tr>
+    <td rowspan="3">Red Alliance</td>
+    <td>{{ red_one_number }}</td>
+    <td rowspan="3">Blue Alliance</td>
+    <td>{{ blue_number_one }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_number_two }}</td>
+    <td>{{ blue_number_two }}</td>
+  </tr>
+  <tr>
+    <td>{{ red_number_three }}</td>
+    <td>{{ blue_number_three }}</td>
+  </tr>
+  <tr>
+    <td>Red Autonomous Score</td>
     <td>{{ red_auto_total }}</td>
+    <td>Blue Autonomous Score</td>
     <td>{{ blue_auto_total }}</td>
   </tr>
   <tr>
-    <td>{{ red_def_one }}</td><td>{{ blue_def_one }}</td>
+    <td rowspan="5"></td>
+    <td>{{ red_def_one }}</td>
+    <td rowspan="5"></td>
+    <td>{{ blue_def_one }}</td>
   </tr>
   <tr>
     <td>{{ red_def_two }}</td><td>{{ blue_def_two }}</td>
@@ -53,11 +72,15 @@ a:hover, a:active {
     <td>{{ red_breach_confirm }}</td><td>{{ blue_breach_confirm }}</td>
   </tr>
   <tr>
+    <td>Red Teleop Score</td>
     <td>{{ red_teleop_total }}</td>
+    <td>Blue Teleop Score</td>
     <td>{{ blue_teleop_total }}</td>
   </tr>
   <tr>
+    <td>Red Final Score</td>
     <td>{{ red_score_total }}</td>
+    <td>Blue Final Score</td>
     <td>{{ blue_score_total }}</td>
   </tr>
 </table>

@@ -7,6 +7,13 @@ import random
 
 
 def battle_match(request, red_one, red_two, red_three, blue_one, blue_two, blue_three):
+    red_one_number = red_one
+    red_number_two = red_two
+    red_number_three = red_three
+    blue_number_one = blue_one
+    blue_number_two = blue_two
+    blue_number_three = blue_three
+
     red_one = Team.objects.filter(team_number=red_one)
     red_two = Team.objects.filter(team_number=red_two)
     red_three = Team.objects.filter(team_number=red_three)
@@ -1444,6 +1451,12 @@ def battle_match(request, red_one, red_two, red_three, blue_one, blue_two, blue_
         'blue_def_two': blue_def_two,
         'blue_def_three': blue_def_three,
         'blue_def_four': blue_def_four,
-        'winner': winner
+        'winner': winner,
+        'red_one_number': red_one_number,
+        'red_number_two': red_number_two,
+        'red_number_three': red_number_three,
+        'blue_number_one': blue_number_one,
+        'blue_number_two': blue_number_two,
+        'blue_number_three': blue_number_three
     }
     )
