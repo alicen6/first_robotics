@@ -56,6 +56,18 @@ This allows the user to input drivetrain (and other) information about an indivi
 
 This button allows for the input of two different team numbers. Once two team numbers are put in, it will display all the same information as Team Stats, but of both teams side by side so that the user can compare. If either team has no information in the database currently, this will not work.
 
+## Fantasy Match
+
+This will take you to a page where you can input six teams of your choice into a Red Alliance and Blue Alliance. Once the teams have been put into alliances, using the stats from matches that have been put in on the teams, a potential match outcome will be displayed.
+The display will show:
+
+* Autonomous Score
+* Teleop Score
+* Which defenses were in play
+* Breach or No Breach
+* Final Score
+* Winner
+
 ## Lookup Teams By Event
 
 Previously, the only way to see what other events teams that were at your event were going to, was to manually go through things like TBA and write it down for yourself. With this, you can input any event and it will display a table showing all teams at that event and also all other events that those teams are going to.
@@ -66,4 +78,4 @@ This simply links to the github issues page so that anybody can report it when t
 
 ## In the Future
 
-In the future, hopefully a feature will be added that allows a user to select 6 teams onto two separate alliances and see the potential outcome of a match between those two alliances.
+In the future, I want to create a log in system so that teams can log into the program, track specific teams, events, use an offline mode and then sync the data later when a connection online is available.
