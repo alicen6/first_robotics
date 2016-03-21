@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, modelform_factory
-from .models import Team, Match
+from frcstats.models import Team, Match
 import random
 
 
